@@ -7,7 +7,8 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.Spark;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+//import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
 //import frc.robot.OI;
 import frc.robot.RobotMap;
@@ -19,7 +20,7 @@ import frc.robot.commands.SDrive;
 public class SlideDrive extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-  Spark m_slider = new Spark(RobotMap.SlideMotor);  
+  WPI_VictorSPX m_slider = new WPI_VictorSPX(RobotMap.SlideMotor);  
   
   
   

@@ -8,20 +8,16 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-//import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.Robot;
 
-public class LineSensing extends Command {
-  public LineSensing() {
+public class UpDawg extends Command {
+  public UpDawg() {
     // Use requires() here to declare subsystem dependencies
-    requires(Robot.sLineSens);
+    // eg. requires(chassis);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    
-
   }
 
   // Called repeatedly when this Command is scheduled to run
