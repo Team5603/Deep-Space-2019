@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.Lift;
 import frc.robot.subsystems.LineSensors;
 import frc.robot.subsystems.Pneumatics;
 import frc.robot.subsystems.SlideDrive;
@@ -35,6 +36,7 @@ public class Robot extends TimedRobot {
   public static final SlideDrive sChaCha  = new SlideDrive();
   public static final LineSensors sLineSens = new LineSensors();
   public static final Pneumatics sPneu = new Pneumatics();
+  public static final Lift sLift= new Lift();
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 

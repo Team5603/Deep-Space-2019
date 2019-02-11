@@ -68,7 +68,22 @@ public class OI {
         return -1*SlideL;
       }
 
-      }
+  }
+
+ 
+  public double getLiftPower(){
+    double up;
+    double down;
+
+    up = m_stick.getPOV(RobotMap.updawg);
+    down = m_stick.getPOV(RobotMap.downdawg);
+
+    if (up>0) {
+      return up;
+    } else {
+        return -1*down;
+    }
+  }
   
 
 

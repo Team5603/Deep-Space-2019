@@ -46,6 +46,8 @@ public class RobotMap {
   public static int rYstick = 5;
   public static int slideaxisL = 2;
   public static int slideaxisR = 3;
+  public static int updawg = 1;
+  public static int downdawg = 2;
 
   //sensors
   public static final int linesensorFL = 0;
