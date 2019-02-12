@@ -7,32 +7,18 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
-//import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
-//import frc.robot.OI;
-import frc.robot.RobotMap;
-import frc.robot.commands.SDrive;
 
 /**
  * Add your docs here.
  */
-public class SlideDrive extends Subsystem {
+public class DriveTrain extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-  WPI_VictorSPX m_slider = new WPI_VictorSPX(RobotMap.SlideMotor);  
-  
-  
-  
+
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-    setDefaultCommand(new SDrive());
-  }
-
-
-  public void ChaCha (double slidePower) {
-    m_slider.set(slidePower);
-
+    // setDefaultCommand(new MySpecialCommand());
   }
 }

@@ -7,22 +7,13 @@
 
 package frc.robot;
 
-import edu.wpi.first.cameraserver.CameraServer;
-//import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.ExampleCommand;
-import frc.robot.subsystems.DriveTrain;
-import frc.robot.subsystems.Elbow;
 import frc.robot.subsystems.ExampleSubsystem;
-import frc.robot.subsystems.Lift;
-import frc.robot.subsystems.LineSensors;
-import frc.robot.subsystems.Pneumatics;
-import frc.robot.subsystems.SlideDrive;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -34,16 +25,7 @@ import frc.robot.subsystems.SlideDrive;
 public class Robot extends TimedRobot {
   public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
   public static OI m_oi;
-  public static Subsystem kElbow;
-  public static final DriveTrain sDriveTrain = new DriveTrain();
-  public static final SlideDrive sChaCha  = new SlideDrive();
-  public static final LineSensors sLineSens = new LineSensors();
-  public static final Pneumatics sPneu = new Pneumatics();
-<<<<<<< HEAD
-  public static final Elbow Elbow = new Elbow();
-=======
-  public static final Lift sLift= new Lift();
->>>>>>> ad5230514b5ee944ea09e4b81635810dc49d3608
+
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 
@@ -57,10 +39,6 @@ public class Robot extends TimedRobot {
     m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser);
-    CameraServer.getInstance().startAutomaticCapture(0);
-		CameraServer.getInstance().startAutomaticCapture(1);
-    
-
   }
 
   /**
@@ -142,8 +120,6 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
-    
-
   }
 
   /**

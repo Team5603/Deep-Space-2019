@@ -31,7 +31,14 @@ public class RobotMap {
   public static final int leftmotorback = 12;
   public static final int rightmotorfront = 13;
   public static final int rightmotorback = 14;
-  public static int SlideMotor = 4;
+  public static final int SlideMotor = 20;
+  public static final int WheelyBar = 21;
+  public static final int OtherWheelyBar = 22;
+  public static final int LiftyBar = 23;
+  public static final int AntiOutTake = 24;
+  public static final int Elbow = 25;
+
+
   
   //joystick stuf
   public static int joystick = 0;
@@ -39,8 +46,14 @@ public class RobotMap {
   public static int rYstick = 5;
   public static int slideaxisL = 2;
   public static int slideaxisR = 3;
+<<<<<<< HEAD
   public static int rXStick = 4;
  
+=======
+  public static int updawg = 1;
+  public static int downdawg = 2;
+
+>>>>>>> ad5230514b5ee944ea09e4b81635810dc49d3608
   //sensors
   public static final int linesensorFL = 0;
   public static final int linesensorFLM = 1;

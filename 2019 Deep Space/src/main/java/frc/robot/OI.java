@@ -6,10 +6,8 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot;
+
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.buttons.Button;
-import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -21,7 +19,7 @@ public class OI {
   //// joystick.
   // You create one by telling it which joystick it's on and which button
   // number it is.
- 
+  // Joystick stick = new Joystick(port);
   // Button button = new JoystickButton(stick, buttonNumber);
 
   // There are a few additional built in buttons you can use. Additionally,
@@ -33,7 +31,7 @@ public class OI {
   // three ways:
 
   // Start the command when the button is pressed and let it run the command
-  // until it is finished as determined by it's isFinished method
+  // until it is finished as determined by it's isFinished method.
   // button.whenPressed(new ExampleCommand());
 
   // Run the command while the button is being held down and interrupt it once
@@ -43,63 +41,6 @@ public class OI {
   // Start the command when the button is released and let it run the command
   // until it is finished as determined by it's isFinished method.
   // button.whenReleased(new ExampleCommand());
-  
-  Joystick m_stick = new Joystick(RobotMap.joystick);
-  
 
-  public double getYleft() {
-    return m_stick.getRawAxis(RobotMap.lYstick);
-
-  }
-
-  public double getYright() {
-    return m_stick.getRawAxis(RobotMap.rYstick);
-
-  }
-
-  public double getSlider() {
-    double SlideL;
-    double SlideR;
-
-    SlideL = m_stick.getRawAxis(RobotMap.slideaxisL);
-    SlideR = m_stick.getRawAxis(RobotMap.slideaxisR);
-
-      if (SlideR>0) {
-        return SlideR;
-        
-      } else {
-        return -1*SlideL;
-      }
-
-<<<<<<< HEAD
-    }
-=======
-  }
-
- 
-  public double getLiftPower(){
-    double up;
-    double down;
-
-    up = m_stick.getPOV(RobotMap.updawg);
-    down = m_stick.getPOV(RobotMap.downdawg);
-
-    if (up>0) {
-      return up;
-    } else {
-        return -1*down;
-    }
-  }
->>>>>>> ad5230514b5ee944ea09e4b81635810dc49d3608
-  
-  public double getElbow() 
-  {
-    double elbowValue = 0;
-      elbowValue = m_stick.getRawAxis(RobotMap.rXStick);
-    
-    return elbowValue;
-  }
+   Joystick stick = new Joystick(0);
 }
-  
-  
-
