@@ -12,10 +12,12 @@ import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.Elbow;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.LineSensors;
 import frc.robot.subsystems.Pneumatics;
@@ -31,10 +33,12 @@ import frc.robot.subsystems.SlideDrive;
 public class Robot extends TimedRobot {
   public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
   public static OI m_oi;
+  public static Subsystem kElbow;
   public static final DriveTrain sDriveTrain = new DriveTrain();
   public static final SlideDrive sChaCha  = new SlideDrive();
   public static final LineSensors sLineSens = new LineSensors();
   public static final Pneumatics sPneu = new Pneumatics();
+  public static final Elbow Elbow = new Elbow();
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 

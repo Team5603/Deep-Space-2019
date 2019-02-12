@@ -7,6 +7,9 @@
 
 package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -30,7 +33,7 @@ public class OI {
   // three ways:
 
   // Start the command when the button is pressed and let it run the command
-  // until it is finished as determined by it's isFinished method.
+  // until it is finished as determined by it's isFinished method
   // button.whenPressed(new ExampleCommand());
 
   // Run the command while the button is being held down and interrupt it once
@@ -40,9 +43,9 @@ public class OI {
   // Start the command when the button is released and let it run the command
   // until it is finished as determined by it's isFinished method.
   // button.whenReleased(new ExampleCommand());
-
+  
   Joystick m_stick = new Joystick(RobotMap.joystick);
- 
+  
 
   public double getYleft() {
     return m_stick.getRawAxis(RobotMap.lYstick);
@@ -68,13 +71,16 @@ public class OI {
         return -1*SlideL;
       }
 
-      }
+    }
   
-
-
-
+  public double getElbow() 
+  {
+    double elbowValue = 0;
+      elbowValue = m_stick.getRawAxis(RobotMap.rXStick);
+    
+    return elbowValue;
   }
-
+}
   
   
 

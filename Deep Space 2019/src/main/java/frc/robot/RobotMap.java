@@ -39,7 +39,8 @@ public class RobotMap {
   public static int rYstick = 5;
   public static int slideaxisL = 2;
   public static int slideaxisR = 3;
-
+  public static int rXStick = 4;
+ 
   //sensors
   public static final int linesensorFL = 0;
   public static final int linesensorFLM = 1;
@@ -55,6 +56,15 @@ public class RobotMap {
   //Pnematic Stuf
   public static final int Compressor = 19;
   
+  //Elbow motors
+  public static final int ELBOW_MOTOR_1 = 25;
+  
+
+  // Elbow movement
+  public static final int ELBOW_END_OF_TRAVEL_UP_LSID = 1;
+  public static final boolean ELBOW_END_OF_TRAVEL_UP_DS = true;
+  public static final int ELBOW_END_OF_TRAVEL_DOWN_LSID = 2;
+  public static final boolean ELBOW_END_OF_TRAVEL_DOWN_DS = true;
 
 
 
