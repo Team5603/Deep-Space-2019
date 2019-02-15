@@ -8,10 +8,12 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.Compressor;
-import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
-import frc.robot.commands.Pneumat;
+
+
 
 /**
  * Add your docs here.
@@ -20,22 +22,28 @@ public class Pneumatics extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
   private Compressor m_compressor;
-  private Solenoid m_Sole1;
-  private Solenoid m_Sole2;
+  private DoubleSolenoid m_DSClimb;
+  private DoubleSolenoid m_DSDetachHatch;
+
+  public Pneumatics() {
+    m_compressor = new Compressor(RobotMap.PCM);
+    m_compressor.setClosedLoopControl(true);
+    m_DSClimb = new DoubleSolenoid(1, 0, 1);
+    m_DSDetachHatch = new DoubleSolenoid(1, 2 , 3);
+  }
 
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
-    setDefaultCommand(new Pneumat());
+    //setDefaultCommand(new MySpecialCommand());
+    //setDefaultCommand(new Descend());
   
   }
 
-  public Pneumatics(){
-    m_Sole1 = new Solenoid(2);
-    m_Sole2 = new Solenoid(3);
-    m_compressor = new Compressor(RobotMap.Compressor);
-    
-
+  public void Climb() {
+    m_DSClimb.set(DoubleSolenoid.Value.kForward);
+  }
+  public void Descend(){
+    m_DSClimb.set(DoubleSolenoid.Value.kReverse);
   }
 }

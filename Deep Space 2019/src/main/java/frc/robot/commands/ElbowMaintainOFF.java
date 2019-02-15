@@ -11,8 +11,9 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 public class ElbowMaintainOFF extends Command {
+  
   public ElbowMaintainOFF() {
-    requires(Robot.Elbow);
+    //requires(Robot.Elbow);
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
   }
@@ -43,4 +44,5 @@ public class ElbowMaintainOFF extends Command {
   @Override
   protected void interrupted() {
   }
+  
 }

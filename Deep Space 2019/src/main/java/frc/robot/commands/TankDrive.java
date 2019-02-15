@@ -27,7 +27,7 @@ public class TankDrive extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.sDriveTrain.TankDrive(Robot.m_oi.getYleft(), Robot.m_oi.getYright());
+    Robot.sDriveTrain.TankDrive(Robot.m_oi.getLeftDrive(), Robot.m_oi.getRightDrive());
   }
 
   // Make this return true when this Command no longer needs to run execute()

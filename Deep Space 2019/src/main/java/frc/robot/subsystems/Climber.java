@@ -7,32 +7,48 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
-//import edu.wpi.first.wpilibj.Spark;
+
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
-//import frc.robot.OI;
 import frc.robot.RobotMap;
-import frc.robot.commands.SDrive;
+import frc.robot.commands.ClimberDefault;
+
 
 /**
  * Add your docs here.
  */
-public class SlideDrive extends Subsystem {
+public class Climber extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-  WPI_VictorSPX m_slider = new WPI_VictorSPX(RobotMap.SlideMotor);  
-  
-  
-  
+
+  private WPI_VictorSPX m_motor1;
+  private WPI_VictorSPX m_motor2;
+  private DoubleSolenoid m_DSClimb;
+
+  public Climber() {
+    m_motor1 = new WPI_VictorSPX(RobotMap.WheelyBar1);
+    m_motor2 = new WPI_VictorSPX(RobotMap.WheelyBar2);
+    m_DSClimb = new DoubleSolenoid(1, 0, 1);
+  }
+
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-    setDefaultCommand(new SDrive());
+    setDefaultCommand(new ClimberDefault());
   }
 
-
-  public void ChaCha (double slidePower) {
-    m_slider.set(-slidePower);
-
+  public void Drive(double speed) {
+    m_motor1.set(ControlMode.PercentOutput, speed);
+    m_motor2.set(ControlMode.PercentOutput, -speed);
   }
+
+  public void Climb() {
+    m_DSClimb.set(DoubleSolenoid.Value.kForward);
+  }
+  public void Descend(){
+    m_DSClimb.set(DoubleSolenoid.Value.kReverse);
+  }
+
 }

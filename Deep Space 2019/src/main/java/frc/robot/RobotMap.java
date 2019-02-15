@@ -26,34 +26,37 @@ public class RobotMap {
   
   //motors and stuff
   
-  
-  public static final int leftmotorfront = 11;
-  public static final int leftmotorback = 12;
-  public static final int rightmotorfront = 13;
-  public static final int rightmotorback = 14;
+  //DRIVE TRAIN
+  public static final int leftmotorfront = 13;
+  public static final int leftmotorback = 14;
+  public static final int rightmotorfront = 11;
+  public static final int rightmotorback = 12;
   public static final int SlideMotor = 20;
-  public static final int WheelyBar = 21;
-  public static final int OtherWheelyBar = 22;
+  
+  //OTHER MOTORS
+  public static final int WheelyBar1 = 21;
+  public static final int WheelyBar2 = 22;
   public static final int LiftyBar = 23;
   public static final int AntiOutTake = 24;
   public static final int Elbow = 25;
 
 
   
-  //joystick stuf
-  public static int joystick = 0;
-  public static int lYstick = 1;
-  public static int rYstick = 5;
-  public static int slideaxisL = 2;
-  public static int slideaxisR = 3;
-<<<<<<< HEAD
-  public static int rXStick = 4;
- 
-=======
+  //OP joystick stuf
+  public static int OPjoystick = 0;
   public static int updawg = 1;
   public static int downdawg = 2;
+  public static int rXStick = 4;
+  public static int ClimbButton =3;
+  public static int ClimbDriveForward = 3;
+  public static int ClimbDriveReverse = 2;
 
->>>>>>> ad5230514b5ee944ea09e4b81635810dc49d3608
+  //Drive Joystick
+  public static int LeftStick = 1;
+  public static int RightStick = 2;
+  public static int DriveAxis = 1;
+  public static int SlideAxis = 0;
+
   //sensors
   public static final int linesensorFL = 0;
   public static final int linesensorFLM = 1;
@@ -67,7 +70,7 @@ public class RobotMap {
   public static final int linesensorBR = 9;
 
   //Pnematic Stuf
-  public static final int Compressor = 19;
+  public static final int PCM = 1;
   
   //Elbow motors
   public static final int ELBOW_MOTOR_1 = 25;

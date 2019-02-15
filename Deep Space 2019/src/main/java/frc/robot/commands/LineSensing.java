@@ -12,9 +12,10 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 public class LineSensing extends Command {
+  
   public LineSensing() {
     // Use requires() here to declare subsystem dependencies
-    requires(Robot.sLineSens);
+    //requires(Robot.sLineSens);
   }
 
   // Called just before this Command runs the first time
@@ -45,4 +46,5 @@ public class LineSensing extends Command {
   @Override
   protected void interrupted() {
   }
+  
 }

@@ -14,8 +14,9 @@ import frc.robot.subsystems.Elbow;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class ElbowJoystick extends Command {
+  
   public ElbowJoystick() {
-    requires(Robot.Elbow);
+    //requires(Robot.Elbow);
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
   }
@@ -30,6 +31,7 @@ public class ElbowJoystick extends Command {
   protected void execute() {
     double Elbow = Robot.m_oi.getElbow();
 
+  /*
   if (Elbow!= 0) 
   {
     (Robot.Elbow).TurnOnMaintain();
@@ -44,6 +46,7 @@ public class ElbowJoystick extends Command {
     else
       Robot.Elbow.stop(); 
   }
+  */
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -55,7 +58,7 @@ public class ElbowJoystick extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.Elbow.stop();
+    //Robot.Elbow.stop();
   }
 
   // Called when another command which requires one or more of the same
@@ -63,4 +66,5 @@ public class ElbowJoystick extends Command {
   @Override
   protected void interrupted() {
   }
+  
 }

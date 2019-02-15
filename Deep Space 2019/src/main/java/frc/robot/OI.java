@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.commands.Climb;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -44,45 +45,39 @@ public class OI {
   // until it is finished as determined by it's isFinished method.
   // button.whenReleased(new ExampleCommand());
   
-  Joystick m_stick = new Joystick(RobotMap.joystick);
-  
+  Joystick m_OPstick = new Joystick(RobotMap.OPjoystick);
+  Joystick m_leftJoystick = new Joystick(RobotMap.LeftStick);
+  Joystick m_rightJoystick = new Joystick(RobotMap.RightStick);
 
-  public double getYleft() {
-    return m_stick.getRawAxis(RobotMap.lYstick);
+  public Button climberButton;
+  
+  public OI() {
+    climberButton = new JoystickButton(m_OPstick, RobotMap.ClimbButton);
+    climberButton.whileHeld(new Climb());
+  }
+  public double getLeftDrive() {
+    return -m_leftJoystick.getRawAxis(RobotMap.DriveAxis);
 
   }
 
-  public double getYright() {
-    return m_stick.getRawAxis(RobotMap.rYstick);
+  public double getRightDrive() {
+    return -m_rightJoystick.getRawAxis(RobotMap.DriveAxis);
 
   }
 
   public double getSlider() {
-    double SlideL;
-    double SlideR;
+    return m_rightJoystick.getRawAxis(RobotMap.SlideAxis);
 
-    SlideL = m_stick.getRawAxis(RobotMap.slideaxisL);
-    SlideR = m_stick.getRawAxis(RobotMap.slideaxisR);
-
-      if (SlideR>0) {
-        return SlideR;
-        
-      } else {
-        return -1*SlideL;
-      }
-
-<<<<<<< HEAD
-    }
-=======
   }
+  
 
  
   public double getLiftPower(){
     double up;
     double down;
 
-    up = m_stick.getPOV(RobotMap.updawg);
-    down = m_stick.getPOV(RobotMap.downdawg);
+    up = m_OPstick.getPOV(RobotMap.updawg);
+    down = m_OPstick.getPOV(RobotMap.downdawg);
 
     if (up>0) {
       return up;
@@ -90,14 +85,29 @@ public class OI {
         return -1*down;
     }
   }
->>>>>>> ad5230514b5ee944ea09e4b81635810dc49d3608
   
   public double getElbow() 
   {
     double elbowValue = 0;
-      elbowValue = m_stick.getRawAxis(RobotMap.rXStick);
+      elbowValue = m_OPstick.getRawAxis(RobotMap.rXStick);
     
     return elbowValue;
+  }
+
+  public double ClimbMotorDrive() {
+    double drivePower = 0;
+
+    if (m_OPstick.getRawAxis(RobotMap.ClimbDriveForward)>0.05) {
+      drivePower =  m_OPstick.getRawAxis(RobotMap.ClimbDriveForward);
+    }
+    
+    if (drivePower==0) {
+      if (m_OPstick.getRawAxis(RobotMap.ClimbDriveReverse)>0.05) {
+        drivePower = m_OPstick.getRawAxis(RobotMap.ClimbDriveReverse);
+      }
+    }
+
+    return drivePower;
   }
 }
   

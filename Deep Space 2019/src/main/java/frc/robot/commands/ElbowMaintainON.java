@@ -11,8 +11,9 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 public class ElbowMaintainON extends Command {
+  
   public ElbowMaintainON() {
-    requires(Robot.Elbow);
+   // requires(Robot.Elbow);
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
   }
@@ -25,7 +26,7 @@ public class ElbowMaintainON extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.Elbow.TurnOnMaintain();
+    //Robot.Elbow.TurnOnMaintain();
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -44,4 +45,5 @@ public class ElbowMaintainON extends Command {
   @Override
   protected void interrupted() {
   }
+  
 }

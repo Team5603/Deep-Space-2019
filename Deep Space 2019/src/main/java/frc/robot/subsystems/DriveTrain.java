@@ -49,7 +49,7 @@ public class DriveTrain extends Subsystem {
     m_leftsparkMback = new CANSparkMax(RobotMap.leftmotorback, MotorType.kBrushless);
     m_leftsparkMfront = new CANSparkMax(RobotMap.leftmotorfront, MotorType.kBrushless);
     m_rightsparkMback = new CANSparkMax(RobotMap.rightmotorback, MotorType.kBrushless);
-    m_rightsparkMfront = new CANSparkMax(RobotMap.leftmotorfront, MotorType.kBrushless);
+    m_rightsparkMfront = new CANSparkMax(RobotMap.rightmotorfront, MotorType.kBrushless);
       
 
     m_leftsparkMback.follow(m_leftsparkMfront);
