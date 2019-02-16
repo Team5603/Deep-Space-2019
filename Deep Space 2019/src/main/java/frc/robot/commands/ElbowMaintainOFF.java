@@ -15,7 +15,7 @@ public class ElbowMaintainOFF extends Command {
   public ElbowMaintainOFF() {
     //requires(Robot.Elbow);
     // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
+    requires(Robot.sElbow);
   }
 
   // Called just before this Command runs the first time

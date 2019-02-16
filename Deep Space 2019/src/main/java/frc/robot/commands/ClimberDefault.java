@@ -25,7 +25,7 @@ public class ClimberDefault extends Command {
   @Override
   protected void execute() {
     Robot.sClimber.Descend();
-    Robot.sClimber.Drive(Robot.m_oi.ClimbMotorDrive());
+    
   }
 
   // Make this return true when this Command no longer needs to run execute()

@@ -15,7 +15,7 @@ import frc.robot.commands.LineSensing;
 /**
  * Add your docs here.
  */
-public class LineSensors extends Subsystem {
+/*public class LineSensors extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
   private DigitalInput m_SensFrontLeft;
@@ -30,7 +30,7 @@ public class LineSensors extends Subsystem {
   private DigitalInput m_SensBackRight;
 
 
-public LineSensors(){
+/*public LineSensors(){
   m_SensFrontLeft = new DigitalInput(RobotMap.linesensorFL);
   m_SensFrontLeftMiddle = new DigitalInput(RobotMap.linesensorFLM);
   m_SensFrontMiddle = new DigitalInput(RobotMap.linesensorFM);
@@ -48,5 +48,5 @@ public LineSensors(){
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     setDefaultCommand(new LineSensing());
-  }
-}
+  }*/
+

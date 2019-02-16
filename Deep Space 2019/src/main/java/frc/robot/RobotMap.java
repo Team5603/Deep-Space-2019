@@ -44,12 +44,13 @@ public class RobotMap {
   
   //OP joystick stuf
   public static int OPjoystick = 0;
-  public static int updawg = 1;
-
-  public static int rXStick = 4;
+  public static int updawg = 1; //leftstick
+  public static int rYStick = 5; //rightstick
   public static int ClimbButton =3;  // X Button
   public static int ClimbDriveForward = 3; //Right Trigger
   public static int ClimbDriveReverse = 2; // left trigger
+  public static int Intake = 1;
+  public static int Outtake = 2;
 
   //Drive Joystick
   public static int LeftStick = 1;
@@ -57,7 +58,7 @@ public class RobotMap {
   public static int DriveAxis = 1;
   public static int SlideAxis = 0;
 
-  //sensors
+  /*sensors (we didnt use this stuf)
   public static final int linesensorFL = 0;
   public static final int linesensorFLM = 1;
   public static final int linesensorFM = 2;
@@ -68,7 +69,7 @@ public class RobotMap {
   public static final int linesensorBM = 7;
   public static final int linesensorBRM = 8;
   public static final int linesensorBR = 9;
-
+*/
   //Pnematic Stuf
   public static final int PCM = 1;
   
@@ -82,6 +83,9 @@ public class RobotMap {
   public static final int ELBOW_END_OF_TRAVEL_DOWN_LSID = 2;
   public static final boolean ELBOW_END_OF_TRAVEL_DOWN_DS = true;
 
+
+  //CargoIn
+  public static int CARGO_IN_PLACE = 3;
 
 
 

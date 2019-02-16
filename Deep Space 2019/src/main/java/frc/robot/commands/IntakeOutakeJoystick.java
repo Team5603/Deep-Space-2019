@@ -10,12 +10,10 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class ElbowMaintainON extends Command {
-  
-  public ElbowMaintainON() {
-   // requires(Robot.Elbow);
+public class IntakeOutakeJoystick extends Command {
+  public IntakeOutakeJoystick() {
     // Use requires() here to declare subsystem dependencies
-    requires(Robot.sElbow);
+    requires(Robot.sInNOut);
   }
 
   // Called just before this Command runs the first time
@@ -26,7 +24,9 @@ public class ElbowMaintainON extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.sElbow.TurnOnMaintain();
+    Robot.sInNOut.In(Robot.m_oi.IntakeButton);
+    Robot.sInNOut.Out(Robot.m_oi.OuttakeButton);
+
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -45,5 +45,4 @@ public class ElbowMaintainON extends Command {
   @Override
   protected void interrupted() {
   }
-  
 }

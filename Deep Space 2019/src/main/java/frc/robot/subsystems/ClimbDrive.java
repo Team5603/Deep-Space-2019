@@ -10,39 +10,27 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import frc.robot.RobotMap;
-import frc.robot.commands.ClimberDefault;
-
+import frc.robot.commands.ClimbDriver;
 
 /**
  * Add your docs here.
  */
-public class Climber extends Subsystem {
+public class ClimbDrive extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-
- 
-  private DoubleSolenoid m_DSClimb;
-
-  public Climber() {
-    m_DSClimb = new DoubleSolenoid(1,  0, 1);
-  }
+  private WPI_VictorSPX m_motor1;
+  private WPI_VictorSPX m_motor2;
 
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-    setDefaultCommand(new ClimberDefault());
+    setDefaultCommand(new ClimbDriver());
   }
+  public void DriveClimb(double speed){
+    m_motor1.set(ControlMode.PercentOutput, speed);
+    m_motor2.set(ControlMode.PercentOutput, -speed);
 
-  
-
-  public void Climb() {
-    m_DSClimb.set(DoubleSolenoid.Value.kForward);
-  }
-  public void Descend(){
-    m_DSClimb.set(DoubleSolenoid.Value.kReverse);
   }
 
 }

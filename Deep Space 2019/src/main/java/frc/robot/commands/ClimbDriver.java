@@ -10,12 +10,10 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class ElbowMaintainON extends Command {
-  
-  public ElbowMaintainON() {
-   // requires(Robot.Elbow);
+public class ClimbDriver extends Command {
+  public ClimbDriver() {
     // Use requires() here to declare subsystem dependencies
-    requires(Robot.sElbow);
+    requires(Robot.sCD);
   }
 
   // Called just before this Command runs the first time
@@ -26,9 +24,9 @@ public class ElbowMaintainON extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.sElbow.TurnOnMaintain();
+    Robot.sCD.DriveClimb(Robot.m_oi.ClimbMotorDrive());
   }
-
+  
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
@@ -45,5 +43,4 @@ public class ElbowMaintainON extends Command {
   @Override
   protected void interrupted() {
   }
-  
 }

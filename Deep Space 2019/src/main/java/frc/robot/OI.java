@@ -11,6 +11,8 @@ import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.Climb;
+import frc.robot.commands.IntakeOutakeJoystick;
+import frc.robot.subsystems.IntakeOutake;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -50,10 +52,21 @@ public class OI {
   Joystick m_rightJoystick = new Joystick(RobotMap.RightStick);
 
   public Button climberButton;
+  public Button IntakeButton;
+  public JoystickButton OuttakeButton;
   
   public OI() {
     climberButton = new JoystickButton(m_OPstick, RobotMap.ClimbButton);
+    IntakeButton = new JoystickButton(m_OPstick, RobotMap.Intake);
+    OuttakeButton = new JoystickButton(m_OPstick, RobotMap.Outtake);
+    
+
+
     climberButton.whileHeld(new Climb());
+    IntakeButton.whileHeld(new IntakeOutakeJoystick());
+    OuttakeButton.whileHeld(new IntakeOutakeJoystick());
+    
+    
   }
   public double getLeftDrive() {
     return -m_leftJoystick.getRawAxis(RobotMap.DriveAxis);
@@ -86,7 +99,7 @@ public class OI {
   public double getElbow() 
   {
     double elbowValue = 0;
-      elbowValue = m_OPstick.getRawAxis(RobotMap.rXStick);
+      elbowValue = m_OPstick.getRawAxis(RobotMap.rYStick);
     
     return elbowValue;
   }
@@ -106,6 +119,12 @@ public class OI {
 
     return drivePower;
   }
+
+  
+    
+    
+  
+  
 }
   
   
