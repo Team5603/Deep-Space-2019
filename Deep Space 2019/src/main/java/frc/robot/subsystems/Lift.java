@@ -20,6 +20,7 @@ public class Lift extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
   WPI_TalonSRX m_lifter = new WPI_TalonSRX(RobotMap.LiftyBar);
+  double liftmultiplier = .5;
 
   @Override
   public void initDefaultCommand() {
@@ -28,6 +29,6 @@ public class Lift extends Subsystem {
   }
 
   public void Lifter(Double LiftPower) {
-    m_lifter.set(LiftPower );
+    m_lifter.set(LiftPower *liftmultiplier );
   }
 }

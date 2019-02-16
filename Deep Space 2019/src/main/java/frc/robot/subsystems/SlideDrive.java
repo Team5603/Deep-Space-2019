@@ -22,7 +22,7 @@ public class SlideDrive extends Subsystem {
   // here. Call these from Commands.
   WPI_VictorSPX m_slider = new WPI_VictorSPX(RobotMap.SlideMotor);  
   
-  
+  double slidemultiplier = .5;
   
   @Override
   public void initDefaultCommand() {
@@ -32,7 +32,7 @@ public class SlideDrive extends Subsystem {
 
 
   public void ChaCha (double slidePower) {
-    m_slider.set(-slidePower);
+    m_slider.set(slidemultiplier * -slidePower);
 
   }
 }

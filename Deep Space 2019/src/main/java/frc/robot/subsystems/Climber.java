@@ -30,7 +30,7 @@ public class Climber extends Subsystem {
   public Climber() {
     m_motor1 = new WPI_VictorSPX(RobotMap.WheelyBar1);
     m_motor2 = new WPI_VictorSPX(RobotMap.WheelyBar2);
-    m_DSClimb = new DoubleSolenoid(1, 0, 1);
+    m_DSClimb = new DoubleSolenoid(1,  0, 1);
   }
 
   @Override

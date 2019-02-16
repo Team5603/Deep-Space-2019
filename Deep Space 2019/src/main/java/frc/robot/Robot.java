@@ -42,7 +42,7 @@ public class Robot extends TimedRobot {
   //public static final LineSensors sLineSens = new LineSensors();
   //public static final Pneumatics sPneu = new Pneumatics();
   //public static final Elbow Elbow = new Elbow();
-  //public static final Lift sLift= new Lift();
+  public static final Lift sLift= new Lift();
   public Compressor m_compressor = new Compressor(RobotMap.PCM);
 
   /**

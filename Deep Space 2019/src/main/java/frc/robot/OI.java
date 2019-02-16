@@ -73,17 +73,14 @@ public class OI {
 
  
   public double getLiftPower(){
-    double up;
-    double down;
+    double lift;
+    
 
-    up = m_OPstick.getPOV(RobotMap.updawg);
-    down = m_OPstick.getPOV(RobotMap.downdawg);
+    lift = m_OPstick.getRawAxis(RobotMap.updawg);
+    return lift;
+    
 
-    if (up>0) {
-      return up;
-    } else {
-        return -1*down;
-    }
+   
   }
   
   public double getElbow() 
@@ -103,7 +100,7 @@ public class OI {
     
     if (drivePower==0) {
       if (m_OPstick.getRawAxis(RobotMap.ClimbDriveReverse)>0.05) {
-        drivePower = m_OPstick.getRawAxis(RobotMap.ClimbDriveReverse);
+        drivePower = -m_OPstick.getRawAxis(RobotMap.ClimbDriveReverse);
       }
     }
 
