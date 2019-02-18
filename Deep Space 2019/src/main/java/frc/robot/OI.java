@@ -11,8 +11,12 @@ import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.Climb;
-import frc.robot.commands.IntakeOutakeJoystick;
-import frc.robot.subsystems.IntakeOutake;
+import frc.robot.commands.Outake;
+import frc.robot.commands.Intake;
+import frc.robot.commands.HatchR;;
+
+
+
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -53,18 +57,21 @@ public class OI {
 
   public Button climberButton;
   public Button IntakeButton;
-  public JoystickButton OuttakeButton;
+  public Button OuttakeButton;
+  public Button hRButton;
   
   public OI() {
     climberButton = new JoystickButton(m_OPstick, RobotMap.ClimbButton);
     IntakeButton = new JoystickButton(m_OPstick, RobotMap.Intake);
     OuttakeButton = new JoystickButton(m_OPstick, RobotMap.Outtake);
+    hRButton = new JoystickButton(m_OPstick, RobotMap.HRButton);
     
 
 
     climberButton.whileHeld(new Climb());
-    IntakeButton.whileHeld(new IntakeOutakeJoystick());
-    OuttakeButton.whileHeld(new IntakeOutakeJoystick());
+    OuttakeButton.whileHeld(new Outake());
+    IntakeButton.whileHeld(new Intake());
+    hRButton.whileHeld(new HatchR());
     
     
   }
@@ -119,6 +126,14 @@ public class OI {
 
     return drivePower;
   }
+
+
+  
+    
+    
+
+    
+  
 
   
     

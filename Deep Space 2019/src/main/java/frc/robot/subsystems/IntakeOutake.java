@@ -16,7 +16,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
-import frc.robot.commands.IntakeOutakeJoystick;
+
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
@@ -30,13 +30,17 @@ public class IntakeOutake extends Subsystem
   private static final double INTAKE_POWER = .8;
   private VictorSPX m_innout;
   private boolean m_limitLastState;
+
+  public IntakeOutake(){
+    m_innout = new VictorSPX(RobotMap.AntiOutTake);
+  }
               
      
     @Override
   public void initDefaultCommand(){   
   // Set the default command for a subsystem here.
-  setDefaultCommand(new IntakeOutakeJoystick());
-  m_innout = new VictorSPX(RobotMap.AntiOutTake);
+  //setDefaultCommand(new IntakeOutakeJoystick());
+ 
     
   
         
@@ -50,14 +54,8 @@ public class IntakeOutake extends Subsystem
     m_innout.set(ControlMode.PercentOutput, -Speed);
   }
 
-public void In(JoystickButton outtakeButton) {
-}
 
-public void In(Button intakeButton) {
-}
 
-public void Out(JoystickButton outtakeButton) {
-}
 
    
 }

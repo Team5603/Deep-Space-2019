@@ -6,19 +6,14 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot.commands;
-import edu.wpi.first.wpilibj.RobotState;
-import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.Robot;
-import frc.robot.subsystems.Elbow;
-import edu.wpi.first.wpilibj.command.Command;
 
-public class ElbowJoystick extends Command {
-  
-  public ElbowJoystick() {
-    requires(Robot.sElbow);
+import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.Robot;
+
+public class HatchR extends Command {
+  public HatchR() {
     // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
+    requires(Robot.sHR);
   }
 
   // Called just before this Command runs the first time
@@ -29,24 +24,7 @@ public class ElbowJoystick extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    double Elbow = Robot.m_oi.getElbow();
-
-  
-  if (Elbow!= 0) 
-  {
-    (Robot.sElbow).TurnOnMaintain();
-    (Robot.sElbow).Raise_Lower(Elbow);
-  } 
-
-  else 
-  {
-    if (Robot.sElbow.GetMaintain())
-      Robot.sElbow.Maintain();
-    
-    else
-      Robot.sElbow.stop(); 
-  }
-  
+    Robot.sHR.Release();
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -58,7 +36,6 @@ public class ElbowJoystick extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    //Robot.Elbow.stop();
   }
 
   // Called when another command which requires one or more of the same
@@ -66,5 +43,4 @@ public class ElbowJoystick extends Command {
   @Override
   protected void interrupted() {
   }
-  
 }

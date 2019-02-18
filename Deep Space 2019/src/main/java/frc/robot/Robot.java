@@ -21,6 +21,7 @@ import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Elbow;
 import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.HatchRelease;
 import frc.robot.subsystems.IntakeOutake;
 import frc.robot.subsystems.Lift;
 //import frc.robot.subsystems.LineSensors;
@@ -48,6 +49,7 @@ public class Robot extends TimedRobot {
   public Compressor m_compressor = new Compressor(RobotMap.PCM);
   public static final IntakeOutake sInNOut = new IntakeOutake();
   public static final ClimbDrive sCD = new ClimbDrive();
+  public static final HatchRelease sHR = new HatchRelease();
 
   /**
    * This function is run when the robot is first started up and should be
@@ -58,8 +60,8 @@ public class Robot extends TimedRobot {
     m_oi = new OI();
     m_compressor.setClosedLoopControl(true);
 
-   // CameraServer.getInstance().startAutomaticCapture(0);
-		//CameraServer.getInstance().startAutomaticCapture(1);
+    //CameraServer.getInstance().startAutomaticCapture(0);
+	//	CameraServer.getInstance().startAutomaticCapture(1);
     
 
   }

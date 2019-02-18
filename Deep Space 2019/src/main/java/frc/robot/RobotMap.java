@@ -46,11 +46,12 @@ public class RobotMap {
   public static int OPjoystick = 0;
   public static int updawg = 1; //leftstick
   public static int rYStick = 5; //rightstick
-  public static int ClimbButton =3;  // X Button
   public static int ClimbDriveForward = 3; //Right Trigger
   public static int ClimbDriveReverse = 2; // left trigger
   public static int Intake = 1;
   public static int Outtake = 2;
+  public static int ClimbButton =3;  // X Button
+  public static int HRButton = 4;
 
   //Drive Joystick
   public static int LeftStick = 1;

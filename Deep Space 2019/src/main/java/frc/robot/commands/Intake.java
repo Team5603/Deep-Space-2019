@@ -9,9 +9,11 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 
-public class IntakeOutakeJoystick extends Command {
-  public IntakeOutakeJoystick() {
+public class Intake extends Command {
+  double m_INspeed = .5;
+  public Intake() {
     // Use requires() here to declare subsystem dependencies
     requires(Robot.sInNOut);
   }
@@ -24,8 +26,8 @@ public class IntakeOutakeJoystick extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.sInNOut.In(Robot.m_oi.IntakeButton);
-    Robot.sInNOut.Out(Robot.m_oi.OuttakeButton);
+    Robot.sInNOut.In(m_INspeed);
+    
 
   }
 
@@ -38,6 +40,7 @@ public class IntakeOutakeJoystick extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    Robot.sInNOut.In(0.0);
   }
 
   // Called when another command which requires one or more of the same

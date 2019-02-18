@@ -7,35 +7,33 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
-
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import frc.robot.RobotMap;
-import frc.robot.commands.ClimbDriver;
+import frc.robot.commands.HatchH;
 
 /**
  * Add your docs here.
  */
-public class ClimbDrive extends Subsystem {
+public class HatchRelease extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-  private WPI_VictorSPX m_motor1;
-  private WPI_VictorSPX m_motor2;
+  private DoubleSolenoid m_Hatcher;
 
-  public ClimbDrive(){
-    m_motor1 = new WPI_VictorSPX(RobotMap.WheelyBar1);
-    m_motor2 = new WPI_VictorSPX(RobotMap.WheelyBar2);
+  public HatchRelease(){
+    m_Hatcher = new DoubleSolenoid(1, 2 , 3);
   }
+
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-    setDefaultCommand(new ClimbDriver());
-  }
-  public void DriveClimb(double speed){
-    m_motor1.set(ControlMode.PercentOutput, speed);
-    m_motor2.set(ControlMode.PercentOutput, -speed);
-
+    setDefaultCommand(new HatchH());
   }
 
+  public void Release(){
+    m_Hatcher.set(DoubleSolenoid.Value.kForward);
+  }
+
+  public void NotRelease(){
+    m_Hatcher.set(DoubleSolenoid.Value.kReverse);
+  }
 }
