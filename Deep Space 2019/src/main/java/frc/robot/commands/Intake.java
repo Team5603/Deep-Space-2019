@@ -27,7 +27,8 @@ public class Intake extends Command {
   @Override
   protected void execute() {
     Robot.sInNOut.In(m_INspeed);
-    
+    System.out.println("Intake Execute : " + m_INspeed);
+ 
 
   }
 
@@ -47,5 +48,6 @@ public class Intake extends Command {
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    Robot.sInNOut.In(0.0);
   }
 }

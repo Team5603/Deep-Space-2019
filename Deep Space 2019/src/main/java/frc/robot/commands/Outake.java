@@ -8,6 +8,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 
 public class Outake extends Command {
@@ -26,6 +27,7 @@ public class Outake extends Command {
   @Override
   protected void execute() {
     Robot.sInNOut.Out(m_OUTspeed);
+    System.out.println("Outtake Execute : " + m_OUTspeed);
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -44,5 +46,6 @@ public class Outake extends Command {
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    Robot.sInNOut.Out(0.0);
   }
 }

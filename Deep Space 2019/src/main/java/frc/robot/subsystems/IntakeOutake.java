@@ -27,9 +27,9 @@ public class IntakeOutake extends Subsystem
 {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-  private static final double INTAKE_POWER = .8;
+  
   private VictorSPX m_innout;
-  private boolean m_limitLastState;
+  
 
   public IntakeOutake(){
     m_innout = new VictorSPX(RobotMap.AntiOutTake);

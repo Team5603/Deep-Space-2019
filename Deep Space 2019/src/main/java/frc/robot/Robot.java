@@ -60,8 +60,8 @@ public class Robot extends TimedRobot {
     m_oi = new OI();
     m_compressor.setClosedLoopControl(true);
 
-    //CameraServer.getInstance().startAutomaticCapture(0);
-	//	CameraServer.getInstance().startAutomaticCapture(1);
+    CameraServer.getInstance().startAutomaticCapture(0);
+		CameraServer.getInstance().startAutomaticCapture(1);
     
 
   }

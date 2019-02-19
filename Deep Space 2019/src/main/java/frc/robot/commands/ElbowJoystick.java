@@ -32,20 +32,12 @@ public class ElbowJoystick extends Command {
     double Elbow = Robot.m_oi.getElbow();
 
   
-  if (Elbow!= 0) 
-  {
-    (Robot.sElbow).TurnOnMaintain();
-    (Robot.sElbow).Raise_Lower(Elbow);
-  } 
-
-  else 
-  {
-    if (Robot.sElbow.GetMaintain())
-      Robot.sElbow.Maintain();
+   
+      
+    Robot.sElbow.Raise_Lower(Elbow);
     
-    else
-      Robot.sElbow.stop(); 
-  }
+
+  
   
   }
 
@@ -65,6 +57,7 @@ public class ElbowJoystick extends Command {
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    
   }
   
 }
