@@ -50,7 +50,7 @@ public class Robot extends TimedRobot {
   public static final IntakeOutake sInNOut = new IntakeOutake();
   public static final ClimbDrive sCD = new ClimbDrive();
   public static final HatchRelease sHR = new HatchRelease();
-
+  public static final Lift kLift = new Lift();
   /**
    * This function is run when the robot is first started up and should be
    * used for any initialization code.

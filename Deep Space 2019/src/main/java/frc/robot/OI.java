@@ -6,6 +6,7 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot;
+import Util.JoystickMap;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -55,6 +56,10 @@ public class OI {
   Joystick m_leftJoystick = new Joystick(RobotMap.LeftStick);
   Joystick m_rightJoystick = new Joystick(RobotMap.RightStick);
 
+  private static final double GAMEPAD_DEADBAND = 0.01;
+
+  public Joystick opPad;
+
   public Button climberButton;
   public Button IntakeButton;
   public Button OuttakeButton;
@@ -90,7 +95,9 @@ public class OI {
 
   }
   
-
+  private static double stickDeadband(double value, double deadband, double center) {
+    return (value < (center + deadband) && value > (center - deadband)) ? center : value;
+  }
  
   public double getLiftPower(){
     double lift;
@@ -101,6 +108,13 @@ public class OI {
     
 
    
+  }
+
+  public double getLiftValue() {
+      double liftValue = 0;
+      liftValue = -stickDeadband(opPad.getRawAxis(JoystickMap.gamepad.LEFT_Y), GAMEPAD_DEADBAND, 0.0);
+  
+      return liftValue;
   }
   
   public double getElbow() 

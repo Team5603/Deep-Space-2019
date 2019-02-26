@@ -88,7 +88,10 @@ public class RobotMap {
   //CargoIn
   public static int CARGO_IN_PLACE = 3;
 
-
+  //Lift
+  public static final boolean LIFT_END_OF_TRAVEL_UP_DS = true;
+  public static final boolean LIFT_END_OF_TRAVEL_DOWN_DS = true;
+  
 
 
 
