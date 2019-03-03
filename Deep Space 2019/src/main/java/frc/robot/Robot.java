@@ -28,6 +28,7 @@ import frc.robot.subsystems.Lift;
 import frc.robot.subsystems.Pneumatics;
 import frc.robot.subsystems.SlideDrive;
 
+
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the TimedRobot
@@ -51,20 +52,42 @@ public class Robot extends TimedRobot {
   public static final ClimbDrive sCD = new ClimbDrive();
   public static final HatchRelease sHR = new HatchRelease();
   public static final Lift kLift = new Lift();
+  double joystickAxis;
+  double deadband = 1.0;
   /**
    * This function is run when the robot is first started up and should be
    * used for any initialization code.
    */
   @Override
-  public void robotInit() {
+  public void robotInit() 
+  {
     m_oi = new OI();
     m_compressor.setClosedLoopControl(true);
 
     CameraServer.getInstance().startAutomaticCapture(0);
 		CameraServer.getInstance().startAutomaticCapture(1);
     
-
+    
+    
+    if (Math.abs(joystickAxis) < deadband) 
+    {
+      joystickAxis = 0;
+    }
+    else
+    {
+      if (joystickAxis>0) {
+       joystickAxis = (joystickAxis - deadband);
+      }
+      else
+      {
+        joystickAxis = (joystickAxis- -deadband);
+      }
+    }
   }
+    
+    
+    
+  
 
   /**
    * This function is called every robot packet, no matter the mode. Use

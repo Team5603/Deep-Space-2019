@@ -29,14 +29,19 @@ public class ElbowJoystick extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    double Elbow = Robot.m_oi.getElbow();
+    double ElbowPower = Robot.m_oi.getElbow();
 
   
    
       
-    Robot.sElbow.Raise_Lower(Elbow);
+    Robot.sElbow.Raise_Lower(ElbowPower);
     
-
+    if (ElbowPower!=0) {
+      Robot.sElbow.m_BuckMaintain();
+    } else {
+      Robot.sElbow.Stop();
+      
+    }
   
   
   }
