@@ -12,7 +12,7 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
-import edu.wpi.first.wpilibj.DigitalInput;
+//import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 import frc.robot.commands.ElbowJoystick;
@@ -25,17 +25,20 @@ import frc.robot.commands.ElbowJoystick;
 public class Elbow extends Subsystem {
   private TalonSRX elbowMotorTalon;
 
-  private DigitalInput elbowEndUp;
-  private DigitalInput elbowEndDown;
+  private boolean m_BuckMaintain = false;
+  private boolean m_maintain = false;
 
-  private static final double RAISE_MULTIPLIER = .25;
-	private static final double LOWER_MULTIPLIER = .13;
+  //private DigitalInput elbowEndUp;
+  //private DigitalInput elbowEndDown;
+
+  //private static final double RAISE_MULTIPLIER = .25;
+	//private static final double LOWER_MULTIPLIER = .13;
 	private static final double MAINTAIN_POWER = .08;
 	
   private static final double HIGH_POW = 0.7;
   private static final double LOW_POW = -0.25;
 
-  private static final double raiselowerPower = 0;
+  //private static final double raiselowerPower = 0;
 
   
   // Put methods for controlling this subsystem
@@ -64,7 +67,17 @@ public class Elbow extends Subsystem {
   }
    
   public void Raise_Lower(Double Speed){
-    elbowMotorTalon.set(ControlMode.PercentOutput, -Speed);
+    if (Speed == 0) {
+      if (m_BuckMaintain)
+        elbowMotorTalon.set(ControlMode.PercentOutput, MAINTAIN_POWER);
+      else
+        elbowMotorTalon.set(ControlMode.PercentOutput, 0);
+    }else{
+      elbowMotorTalon.set(ControlMode.PercentOutput, -Speed);
+    }
+  }
+  public void SetMaintain(boolean DoMaintain){
+     m_BuckMaintain = DoMaintain;
   }
   
   
@@ -75,5 +88,11 @@ public class Elbow extends Subsystem {
     setDefaultCommand(new ElbowJoystick());
   }
 
+  public void Stop() {
+  }
+
+  public boolean GetMaintain() {
+	  return m_maintain;
+  }
 
 }

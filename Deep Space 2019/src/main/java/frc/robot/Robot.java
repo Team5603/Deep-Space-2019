@@ -45,15 +45,14 @@ public class Robot extends TimedRobot {
 
   //public static final LineSensors sLineSens = new LineSensors();
   //public static final Pneumatics sPneu = new Pneumatics();
-  public static final Elbow sElbow = new Elbow();
-  public static final Lift sLift= new Lift();
+  public static final Elbow kElbow = new Elbow();
   public Compressor m_compressor = new Compressor(RobotMap.PCM);
   public static final IntakeOutake sInNOut = new IntakeOutake();
   public static final ClimbDrive sCD = new ClimbDrive();
   public static final HatchRelease sHR = new HatchRelease();
   public static final Lift kLift = new Lift();
   double joystickAxis;
-  double deadband = 1.0;
+  double deadband = 0.02;
   /**
    * This function is run when the robot is first started up and should be
    * used for any initialization code.
@@ -65,9 +64,10 @@ public class Robot extends TimedRobot {
     m_compressor.setClosedLoopControl(true);
 
     CameraServer.getInstance().startAutomaticCapture(0);
-		CameraServer.getInstance().startAutomaticCapture(1);
+    CameraServer.getInstance().startAutomaticCapture(1);
     
-    
+    SmartDashboard.putBoolean("Elbow Maintain : " , Robot.kElbow.GetMaintain());
+    SmartDashboard.putBoolean("Lift Maintain : " , Robot.kLift.GetMaintain());
     
     if (Math.abs(joystickAxis) < deadband) 
     {
@@ -153,6 +153,7 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
+    
     
 
   }

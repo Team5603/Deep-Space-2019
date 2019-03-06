@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.Climb;
 import frc.robot.commands.Outake;
+import frc.robot.commands.TurnOffElbowMaintain;
 import frc.robot.commands.Intake;
 import frc.robot.commands.HatchR;;
 
@@ -64,46 +65,53 @@ public class OI {
   public Button IntakeButton;
   public Button OuttakeButton;
   public Button hRButton;
-  
+  public Button TurnEMainOffButton;
+
   public OI() {
     climberButton = new JoystickButton(m_OPstick, RobotMap.ClimbButton);
     IntakeButton = new JoystickButton(m_OPstick, RobotMap.Intake);
     OuttakeButton = new JoystickButton(m_OPstick, RobotMap.Outtake);
     hRButton = new JoystickButton(m_OPstick, RobotMap.HRButton);
-    
+    TurnEMainOffButton = new JoystickButton(m_OPstick, RobotMap.ElbowMainOff);
 
 
     climberButton.whileHeld(new Climb());
     OuttakeButton.whileHeld(new Outake());
     IntakeButton.whileHeld(new Intake());
     hRButton.whileHeld(new HatchR());
-    
+    TurnEMainOffButton.whenPressed(new TurnOffElbowMaintain());
     
   }
   public double getLeftDrive() {
-    return -m_leftJoystick.getRawAxis(RobotMap.DriveAxis);
-
+    double LeftPower = 0;
+    LeftPower = stickDeadband(-m_leftJoystick.getRawAxis(RobotMap.DriveAxis), GAMEPAD_DEADBAND, 0.0);
+    return LeftPower;
   }
 
   public double getRightDrive() {
-    return -m_rightJoystick.getRawAxis(RobotMap.DriveAxis);
-
+    double RightPower = 0;
+    RightPower= stickDeadband(-m_rightJoystick.getRawAxis(RobotMap.DriveAxis), GAMEPAD_DEADBAND, 0.0);
+    return RightPower;
   }
 
   public double getSlider() {
-    return m_rightJoystick.getRawAxis(RobotMap.SlideAxis);
-
+    double SlidePower = 0;
+    SlidePower = -stickDeadband(m_rightJoystick.getRawAxis(RobotMap.SlideAxis), GAMEPAD_DEADBAND, 0.0);
+    return SlidePower;
   }
   
   private static double stickDeadband(double value, double deadband, double center) {
-    return (value < (center + deadband) && value > (center - deadband)) ? center : value;
+   if (value < (center + deadband) && value > (center - deadband))
+      return center; 
+   else 
+      return value;
   }
  
   public double getLiftPower(){
     double lift;
     
 
-    lift = m_OPstick.getRawAxis(RobotMap.updawg);
+    lift = -stickDeadband(m_OPstick.getRawAxis(RobotMap.updawg), GAMEPAD_DEADBAND, 0.0);
     return lift;
     
 
@@ -120,7 +128,7 @@ public class OI {
   public double getElbow() 
   {
     double elbowValue = 0;
-      elbowValue = m_OPstick.getRawAxis(RobotMap.rYStick);
+      elbowValue = -stickDeadband(m_OPstick.getRawAxis(RobotMap.rYStick), GAMEPAD_DEADBAND, 0.0);
     
     return elbowValue;
   }
@@ -140,6 +148,7 @@ public class OI {
 
     return drivePower;
   }
+  
 
 
   

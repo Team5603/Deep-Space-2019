@@ -7,8 +7,8 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -26,21 +26,11 @@ public class Lift extends Subsystem {
   private static final double MAINTAIN_POWER = .35;
   private boolean m_maintain = false;
 
-  private DigitalInput liftEOTUp;
-  private DigitalInput liftEOTDown;
 
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     setDefaultCommand(new UpDawg());
-  }
-
-  public boolean AtEndOfTravelUp() {
-    return (liftEOTUp.get()!=RobotMap.LIFT_END_OF_TRAVEL_DOWN_DS);
-  }
-
-  public boolean AtEndOfTravelDown() {
-    return (liftEOTDown.get()!=RobotMap.LIFT_END_OF_TRAVEL_DOWN_DS);
   }
 
   public void TurnOffMaintain() {
@@ -57,14 +47,15 @@ public class Lift extends Subsystem {
 
   public void Lifter(Double LiftPower) {
     m_lifter.set(LiftPower *liftmultiplier );
-      if (m_maintain)
-        m_lifter.set(ControlMode.PercentOutput, MAINTAIN_POWER);
-      else 
-        m_lifter.set(ControlMode.PercentOutput, 0);
+            if (m_maintain)
+              m_lifter.set(ControlMode.PercentOutput, MAINTAIN_POWER);
+            else 
+              m_lifter.set(ControlMode.PercentOutput, -LiftPower);
   }
 
+
   public void Maintain() {
-    if (m_maintain)
+      if (m_maintain)
         m_lifter.set(ControlMode.PercentOutput, MAINTAIN_POWER);
       else 
         m_lifter.set(ControlMode.PercentOutput, 0);

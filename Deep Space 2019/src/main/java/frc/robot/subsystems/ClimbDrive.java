@@ -34,7 +34,7 @@ public class ClimbDrive extends Subsystem {
   }
   public void DriveClimb(double speed){
     m_motor1.set(ControlMode.PercentOutput, speed);
-    m_motor2.set(ControlMode.PercentOutput, -speed);
+    m_motor2.set(ControlMode.PercentOutput, speed);
 
   }
 

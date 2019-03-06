@@ -6,17 +6,17 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot.commands;
-import edu.wpi.first.wpilibj.RobotState;
+//import edu.wpi.first.wpilibj.RobotState;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+//import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.subsystems.Elbow;
-import edu.wpi.first.wpilibj.command.Command;
+//import edu.wpi.first.wpilibj.command.Command;
 
 public class ElbowJoystick extends Command {
   
   public ElbowJoystick() {
-    requires(Robot.sElbow);
+    requires(Robot.kElbow);
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
   }
@@ -30,21 +30,20 @@ public class ElbowJoystick extends Command {
   @Override
   protected void execute() {
     double ElbowPower = Robot.m_oi.getElbow();
-
+    if (ElbowPower!=0) 
+      Robot.kElbow.SetMaintain(true);
   
    
       
-    Robot.sElbow.Raise_Lower(ElbowPower);
+    Robot.kElbow.Raise_Lower(ElbowPower);
     
-    if (ElbowPower!=0) {
-      Robot.sElbow.m_BuckMaintain();
-    } else {
-      Robot.sElbow.Stop();
+    
+      
       
     }
   
   
-  }
+  
 
   // Make this return true when this Command no longer needs to run execute()
   @Override

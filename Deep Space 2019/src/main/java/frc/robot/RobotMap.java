@@ -52,7 +52,7 @@ public class RobotMap {
   public static int Outtake = 2;
   public static int ClimbButton =3;  // X Button
   public static int HRButton = 4;
-
+  public static int ElbowMainOff = 10;
   //Drive Joystick
   public static int LeftStick = 1;
   public static int RightStick = 2;

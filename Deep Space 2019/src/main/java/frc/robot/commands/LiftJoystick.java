@@ -35,6 +35,7 @@ public class LiftJoystick extends Command {
         else
         Robot.kLift.Stop();    
     }
+    Robot.kLift.Lifter(liftValue);
   }
 
   // Make this return true when this Command no longer needs to run execute()

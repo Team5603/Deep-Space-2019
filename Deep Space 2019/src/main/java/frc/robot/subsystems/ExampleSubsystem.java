@@ -76,11 +76,14 @@ btw this is Robert E.O Speedwagon don't erase him its for good luck
 */
 
 
+//Hello this is my nonfiction autobiography that I wrote while I was extrememly bored.
+ // It all started in the year 2003 on the 7th month of the year. It was an extrememly hot day and the loving couple of Renee Seguin 
+ // and Tammy Mortensen were excpecting their second child. They had no idea yet, but he would become the dumbest person to ever hit the planet.
+ // The evening had hit the couple harshley as the day moved on. It was an extrememly suprising ordeal when they went into the day wanting it to be average, only to be leaving it with a child instead.
+ //
 
 
 
-
-
-
-
+// Bruh moment #1437
+// Ancestry.com is a dating website for people from alabama
 
