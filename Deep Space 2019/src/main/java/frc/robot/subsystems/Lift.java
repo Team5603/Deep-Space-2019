@@ -9,6 +9,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.revrobotics.CANEncoder;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -23,16 +24,16 @@ public class Lift extends Subsystem {
   // here. Call these from Commands.
   WPI_TalonSRX m_lifter = new WPI_TalonSRX(RobotMap.LiftyBar);
   double liftmultiplier = .5;
-  private static final double MAINTAIN_POWER = .35;
+  private static final double MAINTAIN_POWER = .1;
   private boolean m_maintain = false;
-
-
+  CANEncoder m_LiftEncodVal;
+  
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     setDefaultCommand(new UpDawg());
   }
-
+  
   public void TurnOffMaintain() {
     m_maintain = false;
   }
@@ -47,12 +48,30 @@ public class Lift extends Subsystem {
 
   public void Lifter(Double LiftPower) {
     m_lifter.set(LiftPower *liftmultiplier );
-            if (m_maintain)
-              m_lifter.set(ControlMode.PercentOutput, MAINTAIN_POWER);
-            else 
-              m_lifter.set(ControlMode.PercentOutput, -LiftPower);
+    if (LiftPower == 0) {
+      if (m_maintain) {
+        m_lifter.set(ControlMode.PercentOutput, MAINTAIN_POWER);
+      } else {
+        m_lifter.set(ControlMode.PercentOutput, 0);
+      }
+    } else {
+      m_lifter.set(ControlMode.PercentOutput, -LiftPower);
+    }
+
+  }
+  public double GetEncoder(String otherthing){
+    double returnValue = 0;
+    switch (otherthing){
+      case "Yes":
+        returnValue = m_LiftEncodVal.getPosition();
+        break;
+    }
+    return returnValue;
   }
 
+  public void SetMaintain(boolean DoMaintain){
+    m_maintain = DoMaintain;
+ }
 
   public void Maintain() {
       if (m_maintain)
@@ -64,4 +83,5 @@ public class Lift extends Subsystem {
   public void Stop() {
       m_lifter.set(ControlMode.PercentOutput, 0);
   }
+  
 }

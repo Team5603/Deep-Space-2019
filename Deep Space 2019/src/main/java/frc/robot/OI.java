@@ -111,7 +111,7 @@ public class OI {
     double lift;
     
 
-    lift = -stickDeadband(m_OPstick.getRawAxis(RobotMap.updawg), GAMEPAD_DEADBAND, 0.0);
+    lift = stickDeadband(m_OPstick.getRawAxis(RobotMap.updawg), GAMEPAD_DEADBAND, 0.0);
     return lift;
     
 
@@ -120,7 +120,7 @@ public class OI {
 
   public double getLiftValue() {
       double liftValue = 0;
-      liftValue = -stickDeadband(opPad.getRawAxis(JoystickMap.gamepad.LEFT_Y), GAMEPAD_DEADBAND, 0.0);
+      liftValue = stickDeadband(opPad.getRawAxis(JoystickMap.gamepad.LEFT_Y), GAMEPAD_DEADBAND, 0.0);
   
       return liftValue;
   }
@@ -128,7 +128,7 @@ public class OI {
   public double getElbow() 
   {
     double elbowValue = 0;
-      elbowValue = -stickDeadband(m_OPstick.getRawAxis(RobotMap.rYStick), GAMEPAD_DEADBAND, 0.0);
+      elbowValue = stickDeadband(m_OPstick.getRawAxis(RobotMap.rYStick), GAMEPAD_DEADBAND, 0.0);
     
     return elbowValue;
   }

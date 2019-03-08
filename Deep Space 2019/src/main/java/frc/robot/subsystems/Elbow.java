@@ -33,7 +33,7 @@ public class Elbow extends Subsystem {
 
   //private static final double RAISE_MULTIPLIER = .25;
 	//private static final double LOWER_MULTIPLIER = .13;
-	private static final double MAINTAIN_POWER = .08;
+	private static final double MAINTAIN_POWER = .17;
 	
   private static final double HIGH_POW = 0.7;
   private static final double LOW_POW = -0.25;

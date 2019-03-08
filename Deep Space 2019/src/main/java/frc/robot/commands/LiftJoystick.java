@@ -27,17 +27,9 @@ public class LiftJoystick extends Command {
   protected void execute() {
     double liftValue = Robot.m_oi.getLiftValue();
     if (liftValue != 0) {
-      Robot.kLift.TurnOnMaintain();
-      Robot.kLift.Lifter(liftValue);
-    } else {
-        if (Robot.kLift.GetMaintain())
-            Robot.kLift.Maintain();
-        else
-        Robot.kLift.Stop();    
+      Robot.kLift.SetMaintain(true);
     }
-    Robot.kLift.Lifter(liftValue);
   }
-
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
