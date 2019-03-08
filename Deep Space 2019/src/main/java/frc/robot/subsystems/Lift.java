@@ -13,6 +13,7 @@ import com.revrobotics.CANEncoder;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
 import frc.robot.commands.UpDawg;
 
@@ -23,11 +24,18 @@ public class Lift extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
   WPI_TalonSRX m_lifter = new WPI_TalonSRX(RobotMap.LiftyBar);
-  double liftmultiplier = .5;
+  //double liftmultiplier = .5;
+  private static final double RAISE_MULTIPLIER = .50;
+	private static final double LOWER_MULTIPLIER = .1;
   private static final double MAINTAIN_POWER = .1;
   private boolean m_maintain = false;
   CANEncoder m_LiftEncodVal;
   
+public Lift(){
+  m_lifter.configReverseSoftLimitThreshold(-2305);
+  m_lifter.configReverseSoftLimitEnable(true);
+}
+
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
@@ -47,7 +55,9 @@ public class Lift extends Subsystem {
   }
 
   public void Lifter(Double LiftPower) {
-    m_lifter.set(LiftPower *liftmultiplier );
+  
+
+    //m_lifter.set(LiftPower *liftmultiplier );
     if (LiftPower == 0) {
       if (m_maintain) {
         m_lifter.set(ControlMode.PercentOutput, MAINTAIN_POWER);
@@ -55,7 +65,12 @@ public class Lift extends Subsystem {
         m_lifter.set(ControlMode.PercentOutput, 0);
       }
     } else {
-      m_lifter.set(ControlMode.PercentOutput, -LiftPower);
+      SmartDashboard.putNumber("LiftPower", LiftPower);
+      if (LiftPower>0)
+        m_lifter.set(ControlMode.PercentOutput, -LiftPower*RAISE_MULTIPLIER);
+      else  
+        m_lifter.set(ControlMode.PercentOutput, -LiftPower*LOWER_MULTIPLIER);
+
     }
 
   }

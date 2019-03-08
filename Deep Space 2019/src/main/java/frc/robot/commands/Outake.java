@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 
 public class Outake extends Command {
-  double m_OUTspeed = .5;
+  double m_OUTspeed = .75;
   public Outake() {
     // Use requires() here to declare subsystem dependencies
     requires(Robot.sInNOut);

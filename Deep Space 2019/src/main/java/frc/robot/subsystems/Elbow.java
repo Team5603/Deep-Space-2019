@@ -14,6 +14,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 //import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
 import frc.robot.commands.ElbowJoystick;
 
@@ -31,12 +32,12 @@ public class Elbow extends Subsystem {
   //private DigitalInput elbowEndUp;
   //private DigitalInput elbowEndDown;
 
-  //private static final double RAISE_MULTIPLIER = .25;
-	//private static final double LOWER_MULTIPLIER = .13;
-	private static final double MAINTAIN_POWER = .17;
+  private static final double RAISE_MULTIPLIER = .30;
+	private static final double LOWER_MULTIPLIER = .07;
+	private static final double MAINTAIN_POWER = .09;
 	
-  private static final double HIGH_POW = 0.7;
-  private static final double LOW_POW = -0.25;
+  private static final double HIGH_POW = 1.0;
+  private static final double LOW_POW = -1.0;
 
   //private static final double raiselowerPower = 0;
 
@@ -73,7 +74,11 @@ public class Elbow extends Subsystem {
       else
         elbowMotorTalon.set(ControlMode.PercentOutput, 0);
     }else{
-      elbowMotorTalon.set(ControlMode.PercentOutput, -Speed);
+      SmartDashboard.putNumber("ELbow Speed", Speed);
+      if (Speed>0)
+        elbowMotorTalon.set(ControlMode.PercentOutput, -Speed*LOWER_MULTIPLIER);
+      else
+        elbowMotorTalon.set(ControlMode.PercentOutput, -Speed*RAISE_MULTIPLIER);
     }
   }
   public void SetMaintain(boolean DoMaintain){
