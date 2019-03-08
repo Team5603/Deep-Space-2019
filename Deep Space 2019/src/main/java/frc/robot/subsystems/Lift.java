@@ -55,24 +55,24 @@ public Lift(){
   }
 
   public void Lifter(Double LiftPower) {
-  
+    double liftPowerFinal;
 
+    SmartDashboard.putNumber("LiftSentPower", LiftPower);
     //m_lifter.set(LiftPower *liftmultiplier );
     if (LiftPower == 0) {
       if (m_maintain) {
-        m_lifter.set(ControlMode.PercentOutput, MAINTAIN_POWER);
+        liftPowerFinal = MAINTAIN_POWER;
       } else {
-        m_lifter.set(ControlMode.PercentOutput, 0);
+        liftPowerFinal = 0;
       }
     } else {
-      SmartDashboard.putNumber("LiftPower", LiftPower);
-      if (LiftPower>0)
-        m_lifter.set(ControlMode.PercentOutput, -LiftPower*RAISE_MULTIPLIER);
+      if (LiftPower<0)
+        liftPowerFinal = -LiftPower*RAISE_MULTIPLIER;
       else  
-        m_lifter.set(ControlMode.PercentOutput, -LiftPower*LOWER_MULTIPLIER);
-
+        liftPowerFinal = -LiftPower*LOWER_MULTIPLIER;
     }
-
+    SmartDashboard.putNumber("Lift Motor Power", liftPowerFinal);
+    m_lifter.set(ControlMode.PercentOutput, liftPowerFinal);
   }
   public double GetEncoder(String otherthing){
     double returnValue = 0;

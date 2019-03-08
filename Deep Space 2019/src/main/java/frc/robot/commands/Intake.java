@@ -12,7 +12,7 @@ import frc.robot.Robot;
 import frc.robot.RobotMap;
 
 public class Intake extends Command {
-  double m_INspeed = .5;
+  double m_INspeed = .75;
   public Intake() {
     // Use requires() here to declare subsystem dependencies
     requires(Robot.sInNOut);

@@ -48,10 +48,10 @@ public class IntakeOutake extends Subsystem
   }
 
   public void In(double Speed){
-    m_innout.set(ControlMode.PercentOutput, Speed);
+    m_innout.set(ControlMode.PercentOutput, -Speed);
   }
   public void Out(Double Speed) {
-    m_innout.set(ControlMode.PercentOutput, -Speed);
+    m_innout.set(ControlMode.PercentOutput, Speed);
   }
 
 
