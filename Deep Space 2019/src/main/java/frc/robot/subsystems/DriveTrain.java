@@ -72,7 +72,11 @@ public class DriveTrain extends Subsystem {
 
 
   public void TankDrive(double leftpower, double rightpower){
-    m_dd.tankDrive(leftpower, rightpower, true);
+    try {
+      m_dd.tankDrive(leftpower, rightpower, true);
+    }
+    catch (Exception en) {}
+
 
   }
 
@@ -80,20 +84,22 @@ public class DriveTrain extends Subsystem {
   public double GetPostion(String whatMotor){
     // send in RF RB LF LB to represent what motor was sent in
     double returnValue = 0;
-    switch (whatMotor){
-      case "LF":
-        returnValue = m_EncoderLF.getPosition();
-        break;
-      case "LB":
-       returnValue = m_EncoderLB.getPosition();
-        break;
-      case "RF":
-        returnValue = m_EncoderRF.getPosition();
-        break;
-      case "RB":
-      returnValue = m_EncoderRB.getPosition();
-        break;
-    }
+    try {
+      switch (whatMotor){
+        case "LF":
+          returnValue = m_EncoderLF.getPosition();
+          break;
+        case "LB":
+         returnValue = m_EncoderLB.getPosition();
+          break;
+        case "RF":
+          returnValue = m_EncoderRF.getPosition();
+          break;
+        case "RB":
+        returnValue = m_EncoderRB.getPosition();
+          break;
+      }
+    } catch (Exception en) {}
     return returnValue;
   }
 }

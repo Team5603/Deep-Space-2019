@@ -26,8 +26,9 @@ public class Lift extends Subsystem {
   WPI_TalonSRX m_lifter = new WPI_TalonSRX(RobotMap.LiftyBar);
   //double liftmultiplier = .5;
   private static final double RAISE_MULTIPLIER = .50;
-	private static final double LOWER_MULTIPLIER = .1;
+	private static final double LOWER_MULTIPLIER = .2;
   private static final double MAINTAIN_POWER = .1;
+  private static final double LIFT_CLIMB_POWER = .5;
   private boolean m_maintain = false;
   CANEncoder m_LiftEncodVal;
   
@@ -67,13 +68,18 @@ public Lift(){
       }
     } else {
       if (LiftPower<0)
-        liftPowerFinal = -LiftPower*RAISE_MULTIPLIER;
+        liftPowerFinal = LiftPower*RAISE_MULTIPLIER;
       else  
-        liftPowerFinal = -LiftPower*LOWER_MULTIPLIER;
+        liftPowerFinal = LiftPower*LOWER_MULTIPLIER;
     }
     SmartDashboard.putNumber("Lift Motor Power", liftPowerFinal);
     m_lifter.set(ControlMode.PercentOutput, liftPowerFinal);
   }
+
+  public void liftClimb(){
+    m_lifter.set(ControlMode.PercentOutput, LIFT_CLIMB_POWER);
+  }
+
   public double GetEncoder(String otherthing){
     double returnValue = 0;
     switch (otherthing){

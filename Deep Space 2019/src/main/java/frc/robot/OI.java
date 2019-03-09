@@ -118,6 +118,10 @@ public class OI {
    
   }
 
+  public boolean getLiftClimb(){
+    return m_OPstick.getPOV() == 180;
+  }
+
   public double getLiftValue() {
       double liftValue = 0;
       liftValue = stickDeadband(opPad.getRawAxis(JoystickMap.gamepad.LEFT_Y), GAMEPAD_DEADBAND, 0.0);

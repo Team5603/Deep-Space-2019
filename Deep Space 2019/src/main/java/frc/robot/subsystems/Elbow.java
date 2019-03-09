@@ -11,6 +11,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.revrobotics.CANEncoder;
 
 //import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -35,10 +36,12 @@ public class Elbow extends Subsystem {
   private static final double RAISE_MULTIPLIER = .30;
 	private static final double LOWER_MULTIPLIER = .2; // was .07 3/8/19 12:49pm
 	private static final double MAINTAIN_POWER = .09;
+	private static final double ELBOW_CLIMB_POWER = .5;
 	
   private static final double HIGH_POW = 1.0;
   private static final double LOW_POW = -1.0;
 
+ 
   //private static final double raiselowerPower = 0;
 
   
@@ -64,23 +67,37 @@ public class Elbow extends Subsystem {
     //Encoder
     elbowMotorTalon.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
     elbowMotorTalon.setSelectedSensorPosition(0, 0, 0);
-
+    elbowMotorTalon.setSelectedSensorPosition(0, 0, 0);
   }
    
   public void Raise_Lower(Double Speed){
+    SmartDashboard.putNumber("ElbowSentPower", Speed);
+    double elbowFinalPower=0;
     if (Speed == 0) {
       if (m_BuckMaintain)
-        elbowMotorTalon.set(ControlMode.PercentOutput, MAINTAIN_POWER);
+        elbowFinalPower = MAINTAIN_POWER;
+        //elbowMotorTalon.set(ControlMode.PercentOutput, MAINTAIN_POWER);
       else
-        elbowMotorTalon.set(ControlMode.PercentOutput, 0);
+        elbowFinalPower = 0;
+        //elbowMotorTalon.set(ControlMode.PercentOutput, 0);
     }else{
-      SmartDashboard.putNumber("ELbow Speed", Speed);
       if (Speed>0)
-        elbowMotorTalon.set(ControlMode.PercentOutput, -Speed*LOWER_MULTIPLIER);
+        elbowFinalPower = -Speed*LOWER_MULTIPLIER;
+        //elbowMotorTalon.set(ControlMode.PercentOutput, -Speed*LOWER_MULTIPLIER);
       else
-        elbowMotorTalon.set(ControlMode.PercentOutput, -Speed*RAISE_MULTIPLIER);
+        elbowFinalPower = -Speed*RAISE_MULTIPLIER;
+        //elbowMotorTalon.set(ControlMode.PercentOutput, -Speed*RAISE_MULTIPLIER);
     }
+    SmartDashboard.putNumber("ElbowMotorPower", elbowFinalPower);
+    elbowMotorTalon.set(ControlMode.PercentOutput, elbowFinalPower);
+
+    SmartDashboard.putNumber("ElbowEncoder", elbowMotorTalon.getSelectedSensorPosition(0));
+
   }
+  public void ElbowClimb(){
+    elbowMotorTalon.set(ControlMode.PercentOutput, ELBOW_CLIMB_POWER);
+  }
+
   public void SetMaintain(boolean DoMaintain){
      m_BuckMaintain = DoMaintain;
   }
