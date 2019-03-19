@@ -66,6 +66,8 @@ public class OI {
   public Button OuttakeButton;
   public Button hRButton;
   public Button TurnEMainOffButton;
+  public Button Timber;
+  public Button Ascension;
 
   public OI() {
     climberButton = new JoystickButton(m_OPstick, RobotMap.ClimbButton);
@@ -73,7 +75,7 @@ public class OI {
     OuttakeButton = new JoystickButton(m_OPstick, RobotMap.Outtake);
     hRButton = new JoystickButton(m_OPstick, RobotMap.HRButton);
     TurnEMainOffButton = new JoystickButton(m_OPstick, RobotMap.ElbowMainOff);
-
+    
 
     climberButton.whileHeld(new Climb());
     OuttakeButton.whileHeld(new Outake());
@@ -122,6 +124,10 @@ public class OI {
     return m_OPstick.getPOV() == 180;
   }
 
+  public boolean GoodFeels() {
+    return m_OPstick.getPOV() == 0;
+  }
+
   public double getLiftValue() {
       double liftValue = 0;
       liftValue = stickDeadband(opPad.getRawAxis(JoystickMap.gamepad.LEFT_Y), GAMEPAD_DEADBAND, 0.0);
@@ -152,10 +158,13 @@ public class OI {
 
     return drivePower;
   }
+ 
   
+  
+  }
 
 
-  
+
     
     
 
@@ -167,7 +176,7 @@ public class OI {
     
   
   
-}
+
   
   
 

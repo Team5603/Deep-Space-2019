@@ -24,10 +24,11 @@ public class Climber extends Subsystem {
   // here. Call these from Commands.
 
  
-  private DoubleSolenoid m_DSClimb;
-
+  private DoubleSolenoid m_DSBWClimb;
+  private DoubleSolenoid m_DSFWClimb;
   public Climber() {
-    m_DSClimb = new DoubleSolenoid(1,  0, 1);
+    m_DSBWClimb = new DoubleSolenoid(1, 0, 1);
+    m_DSFWClimb = new DoubleSolenoid(1, 2, 3);
   }
 
   @Override
@@ -38,11 +39,14 @@ public class Climber extends Subsystem {
 
   
 
-  public void Climb() {
-    m_DSClimb.set(DoubleSolenoid.Value.kForward);
+  public void BWClimb() {
+    m_DSBWClimb.set(DoubleSolenoid.Value.kForward);
   }
-  public void Descend(){
-    m_DSClimb.set(DoubleSolenoid.Value.kReverse);
+  public void BWDescend(){
+    m_DSBWClimb.set(DoubleSolenoid.Value.kReverse);
   }
-
+  public void Break(){
+    m_DSBWClimb.set(DoubleSolenoid.Value.kOff);
+    m_DSFWClimb.set(DoubleSolenoid.Value.kOff);
+  }
 }

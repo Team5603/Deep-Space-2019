@@ -53,6 +53,9 @@ public class RobotMap {
   public static int ClimbButton =3;  // X Button
   public static int HRButton = 4;
   public static int ElbowMainOff = 10;
+  public static int DesendButton = 6;
+  public static int AsendButton = 5;
+  
   //Drive Joystick
   public static int LeftStick = 1;
   public static int RightStick = 2;

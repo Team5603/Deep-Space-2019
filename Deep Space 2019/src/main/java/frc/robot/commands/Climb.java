@@ -24,8 +24,9 @@ public class Climb extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    System.out.println("Execute Climb Command");
-    Robot.sClimber.Climb();
+    
+    Robot.sClimber.Break();
+      
   }
 
   // Make this return true when this Command no longer needs to run execute()
