@@ -30,8 +30,7 @@ public class Pneumatics extends Subsystem {
     m_compressor = new Compressor(RobotMap.PCM);
     m_compressor.setClosedLoopControl(true);
     m_DSClimb = new DoubleSolenoid(1, 0, 1);
-    m_DSDetachHatch = new DoubleSolenoid(1, 2 , 3);
-    m_DSBreak = new DoubleSolenoid(1, 2 , 3 );
+    m_DSDetachHatch = new DoubleSolenoid(1, 2, 3);
   }
 
   @Override

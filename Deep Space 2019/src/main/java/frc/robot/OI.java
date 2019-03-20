@@ -68,15 +68,19 @@ public class OI {
   public Button TurnEMainOffButton;
   public Button Timber;
   public Button Ascension;
+  //public Button ForwardClimberButton;
+  //public Button ReverseClimberButton;
 
   public OI() {
     climberButton = new JoystickButton(m_OPstick, RobotMap.ClimbButton);
+    //ForwardClimberButton = new JoystickButton(m_OPstick, RobotMap.ClimbDriveForward);
+    //ReverseClimberButton = new JoystickButton(m_OPstick, RobotMap.ClimbDriveReverse);
     IntakeButton = new JoystickButton(m_OPstick, RobotMap.Intake);
     OuttakeButton = new JoystickButton(m_OPstick, RobotMap.Outtake);
     hRButton = new JoystickButton(m_OPstick, RobotMap.HRButton);
     TurnEMainOffButton = new JoystickButton(m_OPstick, RobotMap.ElbowMainOff);
     
-
+    
     climberButton.whileHeld(new Climb());
     OuttakeButton.whileHeld(new Outake());
     IntakeButton.whileHeld(new Intake());
