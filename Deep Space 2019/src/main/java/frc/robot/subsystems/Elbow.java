@@ -41,6 +41,7 @@ public class Elbow extends Subsystem {
   private static final double HIGH_POW = 1.0;
   private static final double LOW_POW = -1.0;
 
+  double encELBOW = 0;
  
   //private static final double raiselowerPower = 0;
 
@@ -52,12 +53,7 @@ public class Elbow extends Subsystem {
      // Set the default command for a subsystem here.
     
     elbowMotorTalon = new TalonSRX(RobotMap.ELBOW_MOTOR_1);
-
-		elbowMotorTalon.configPeakOutputForward(HIGH_POW, 0);
-		elbowMotorTalon.configPeakOutputReverse(LOW_POW, 0);
-		elbowMotorTalon.configNominalOutputForward(0.0, 0);
-		elbowMotorTalon.configNominalOutputReverse(0.0, 0);
-    
+   
     //Break Mode
     elbowMotorTalon.setNeutralMode(NeutralMode.Brake); 
 
@@ -65,21 +61,31 @@ public class Elbow extends Subsystem {
 		elbowMotorTalon.setInverted(true);
 		
     //Encoder
-    elbowMotorTalon.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
-    elbowMotorTalon.setSelectedSensorPosition(0, 0, 0);
-    
+    elbowMotorTalon.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 30);
+    elbowMotorTalon.setSelectedSensorPosition(0,0,0);
+    elbowMotorTalon.configNominalOutputForward(0,30);
+    elbowMotorTalon.configNominalOutputReverse(0, 30);
+    elbowMotorTalon.configPeakOutputForward(.2, 30); //motor currently going in reverse when lift goes up
+    elbowMotorTalon.configPeakOutputReverse(.45, 30);
+
+    elbowMotorTalon.configAllowableClosedloopError(0, 0, 30);
+
+    elbowMotorTalon.config_kP(5, 0, 30);
+    elbowMotorTalon.config_kI(0, 0, 30);
+    elbowMotorTalon.config_kD(1, 0, 30);
+    elbowMotorTalon.config_kF(0, 0, 30);
+    elbowMotorTalon.configReverseSoftLimitThreshold(-20);
+    elbowMotorTalon.configReverseSoftLimitEnable(true);
+    elbowMotorTalon.configForwardSoftLimitThreshold(2600);
+    elbowMotorTalon.configForwardSoftLimitEnable(true);
   }
    
   public void Raise_Lower(Double Speed){
     SmartDashboard.putNumber("ElbowSentPower", Speed);
     double elbowFinalPower=0;
     if (Speed == 0) {
-      if (m_BuckMaintain)
-        elbowFinalPower = MAINTAIN_POWER;
-        //elbowMotorTalon.set(ControlMode.PercentOutput, MAINTAIN_POWER);
-      else
-        elbowFinalPower = 0;
-        //elbowMotorTalon.set(ControlMode.PercentOutput, 0);
+      //elbowFinalPower = MAINTAIN_POWER;
+      elbowMotorTalon.set(ControlMode.Position, encELBOW);
     }else{
       if (Speed>0)
         elbowFinalPower = Speed*LOWER_MULTIPLIER;
@@ -87,9 +93,11 @@ public class Elbow extends Subsystem {
       else
         elbowFinalPower = Speed*RAISE_MULTIPLIER;
         //elbowMotorTalon.set(ControlMode.PercentOutput, -Speed*RAISE_MULTIPLIER);
+      encELBOW = GetEncoder();
+      elbowMotorTalon.set(ControlMode.PercentOutput, elbowFinalPower);
     }
-    SmartDashboard.putNumber("ElbowMotorPower", elbowFinalPower);
-    elbowMotorTalon.set(ControlMode.PercentOutput, elbowFinalPower);
+    SmartDashboard.putNumber("ElbowMotorPower", elbowMotorTalon.getMotorOutputPercent());
+
 
   }
   
