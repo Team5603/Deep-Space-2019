@@ -21,12 +21,13 @@ import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Elbow;
 import frc.robot.subsystems.ExampleSubsystem;
-import frc.robot.subsystems.HatchRelease;
+
 import frc.robot.subsystems.IntakeOutake;
 import frc.robot.subsystems.Lift;
 //import frc.robot.subsystems.LineSensors;
 import frc.robot.subsystems.Pneumatics;
-import frc.robot.subsystems.SlideDrive;
+//import frc.robot.subsystems.SlideDrive;
+import frc.robot.subsystems.UptownFunk;
 
 
 /**
@@ -40,7 +41,7 @@ public class Robot extends TimedRobot {
   public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
   public static OI m_oi;
   public static final DriveTrain sDriveTrain = new DriveTrain();
-  public static final SlideDrive sChaCha  = new SlideDrive();
+  //public static final SlideDrive sChaCha  = new SlideDrive();
   public static final Climber sClimber = new Climber();
 
   //public static final LineSensors sLineSens = new LineSensors();
@@ -49,7 +50,7 @@ public class Robot extends TimedRobot {
   public Compressor m_compressor = new Compressor(RobotMap.PCM);
   public static final IntakeOutake sInNOut = new IntakeOutake();
   public static final ClimbDrive sCD = new ClimbDrive();
-  public static final HatchRelease sHR = new HatchRelease();
+  public static final UptownFunk kFunk = new UptownFunk();
   public static final Lift kLift = new Lift();
   double joystickAxis;
   double deadband = 0.02;
@@ -65,26 +66,13 @@ public class Robot extends TimedRobot {
 
     CameraServer.getInstance().startAutomaticCapture(0);
     CameraServer.getInstance().startAutomaticCapture(1);
-    
-    SmartDashboard.putBoolean("Elbow Maintain : " , Robot.kElbow.GetMaintain());
-    SmartDashboard.putBoolean("Lift Maintain : " , Robot.kLift.GetMaintain());
-    
-    if (Math.abs(joystickAxis) < deadband) 
-    {
-      joystickAxis = 0;
-    }
-    else
-    {
-      if (joystickAxis>0) {
-       joystickAxis = (joystickAxis - deadband);
-      }
-      else
-      {
-        joystickAxis = (joystickAxis- -deadband);
-      }
-    }
+
   }
-    
+  
+  private void UpdateSmartDashboard() {
+    SmartDashboard.putNumber("Lift Encoder:", kLift.GetEncoder());  
+    SmartDashboard.putNumber("Elbow Encoder:", kElbow.GetEncoder());  
+  }
     
     
   
@@ -112,6 +100,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void disabledPeriodic() {
+    UpdateSmartDashboard();
     Scheduler.getInstance().run();
   }
 
@@ -136,6 +125,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
+    UpdateSmartDashboard();
     Scheduler.getInstance().run();
   }
 
@@ -152,6 +142,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
+    UpdateSmartDashboard();
     Scheduler.getInstance().run();
     
     

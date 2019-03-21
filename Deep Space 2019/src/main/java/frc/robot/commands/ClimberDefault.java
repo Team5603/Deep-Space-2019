@@ -7,6 +7,8 @@
 
 package frc.robot.commands;
 
+
+
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
@@ -24,7 +26,29 @@ public class ClimberDefault extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.sClimber.BWDescend();
+    int POVvalue = Robot.m_oi.getPOV();
+    switch (POVvalue) {
+      case 0:
+        Robot.sClimber.BACKClimb();
+        Robot.sClimber.FRONTClimb();
+        break;
+      case 90:
+        Robot.sClimber.BACKDescend();
+        Robot.sClimber.FRONTOff();
+        break;
+      case 180:
+        Robot.sClimber.BACKDescend();
+        Robot.sClimber.FRONTDescend();
+        break;
+      case 270:
+        Robot.sClimber.BACKOff();
+        Robot.sClimber.FRONTDescend();
+        break;
+      default:
+        Robot.sClimber.Break();
+        break;
+    }
+
     
   }
 
@@ -37,6 +61,7 @@ public class ClimberDefault extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    Robot.sClimber.Break();
   }
 
   // Called when another command which requires one or more of the same

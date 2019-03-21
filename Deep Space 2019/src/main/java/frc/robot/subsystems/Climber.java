@@ -24,11 +24,11 @@ public class Climber extends Subsystem {
   // here. Call these from Commands.
 
  
-  private DoubleSolenoid m_DSBWClimb;
-  private DoubleSolenoid m_DSFWClimb;
+  private DoubleSolenoid m_DSBACKClimb;
+  private DoubleSolenoid m_DSFRONTClimb;
   public Climber() {
-    m_DSBWClimb = new DoubleSolenoid(1, 0, 1);
-    m_DSFWClimb = new DoubleSolenoid(1, 2, 3);
+    m_DSBACKClimb = new DoubleSolenoid(1, 2, 3);
+    m_DSFRONTClimb = new DoubleSolenoid(1, 0, 1);
   }
 
   @Override
@@ -39,14 +39,28 @@ public class Climber extends Subsystem {
 
   
 
-  public void BWClimb() {
-    m_DSBWClimb.set(DoubleSolenoid.Value.kForward);
+  public void BACKClimb() {
+    m_DSBACKClimb.set(DoubleSolenoid.Value.kForward);
   }
-  public void BWDescend(){
-    m_DSBWClimb.set(DoubleSolenoid.Value.kReverse);
+  public void BACKDescend(){
+    m_DSBACKClimb.set(DoubleSolenoid.Value.kReverse);
   }
+  public void BACKOff() {
+    m_DSBACKClimb.set(DoubleSolenoid.Value.kOff);
+  }
+
+  public void FRONTClimb() {
+    m_DSFRONTClimb.set(DoubleSolenoid.Value.kForward);
+  }
+  public void FRONTDescend(){
+    m_DSFRONTClimb.set(DoubleSolenoid.Value.kReverse);
+  }
+  public void FRONTOff() {
+    m_DSFRONTClimb.set(DoubleSolenoid.Value.kOff);
+  }
+
   public void Break(){
-    m_DSBWClimb.set(DoubleSolenoid.Value.kOff);
-    m_DSFWClimb.set(DoubleSolenoid.Value.kOff);
+    m_DSBACKClimb.set(DoubleSolenoid.Value.kOff);
+    m_DSFRONTClimb.set(DoubleSolenoid.Value.kOff);
   }
 }

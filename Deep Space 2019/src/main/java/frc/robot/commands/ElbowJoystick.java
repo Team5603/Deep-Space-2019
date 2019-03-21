@@ -34,14 +34,7 @@ public class ElbowJoystick extends Command {
       Robot.kElbow.SetMaintain(true);
   
    
-    if (Robot.m_oi.getLiftClimb()) {
-      Robot.kElbow.ElbowClimb();
-    } else {
       Robot.kElbow.Raise_Lower(ElbowPower);
-    }
-    
-    
-      
       
     }
   

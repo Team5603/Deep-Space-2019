@@ -6,15 +6,17 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot.commands;
-import frc.robot.*;
-import frc.robot.OI;
-import edu.wpi.first.wpilibj.RobotState;
-import edu.wpi.first.wpilibj.command.Command;
 
-public class LiftJoystick extends Command {
-  public LiftJoystick() {
+import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.Robot;
+
+public class CLimbExtend extends Command {
+  char m_WhichOne;
+  public CLimbExtend(char FrontBack) {
+    m_WhichOne = FrontBack;
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
+    requires(Robot.sClimber);
   }
 
   // Called just before this Command runs the first time
@@ -25,11 +27,18 @@ public class LiftJoystick extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    double liftValue = Robot.m_oi.getLiftValue();
-    if (liftValue != 0) {
-      Robot.kLift.SetMaintain(true);
+    switch(m_WhichOne) {
+      case 'F':
+        Robot.sClimber.FRONTClimb();
+        Robot.sClimber.BACKOff();
+        break;
+      case 'B':
+        Robot.sClimber.BACKClimb();
+        Robot.sClimber.FRONTOff();
+        break;
     }
   }
+
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
@@ -39,11 +48,13 @@ public class LiftJoystick extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    Robot.sClimber.Break();
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    end();
   }
 }

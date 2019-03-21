@@ -31,7 +31,7 @@ public class RobotMap {
   public static final int leftmotorback = 14;
   public static final int rightmotorfront = 11;
   public static final int rightmotorback = 12;
-  public static final int SlideMotor = 20;
+  public static final int FunkMotor = 20; // front climber extension
   
   //OTHER MOTORS
   public static final int WheelyBar1 = 21;
@@ -50,17 +50,18 @@ public class RobotMap {
   public static int ClimbDriveReverse = 2; // left trigger
   public static int Intake = 1;
   public static int Outtake = 2;
-  public static int ClimbButton =3;  // X Button
-  public static int HRButton = 4;
-  public static int ElbowMainOff = 10;
-  public static int DesendButton = 6;
-  public static int AsendButton = 5;
+  public static int FrontExtend =3;  // X Button
+  public static int BackExtend = 4;
+  public static int FunkButton = 8;
+  //public static int ElbowMainOff = 10;
+  //public static int DesendButton = 6;
+  //public static int AsendButton = 5;
   
   //Drive Joystick
   public static int LeftStick = 1;
   public static int RightStick = 2;
   public static int DriveAxis = 1;
-  public static int SlideAxis = 0;
+  //public static int SlideAxis = 0;
 
   /*sensors (we didnt use this stuf)
   public static final int linesensorFL = 0;
@@ -81,19 +82,7 @@ public class RobotMap {
   public static final int ELBOW_MOTOR_1 = 25;
   
 
-  // Elbow movement
-  public static final int ELBOW_END_OF_TRAVEL_UP_LSID = 1;
-  public static final boolean ELBOW_END_OF_TRAVEL_UP_DS = true;
-  public static final int ELBOW_END_OF_TRAVEL_DOWN_LSID = 2;
-  public static final boolean ELBOW_END_OF_TRAVEL_DOWN_DS = true;
-
-
-  //CargoIn
-  public static int CARGO_IN_PLACE = 3;
-
-  //Lift
-  public static final boolean LIFT_END_OF_TRAVEL_UP_DS = true;
-  public static final boolean LIFT_END_OF_TRAVEL_DOWN_DS = true;
+ 
   
 
 

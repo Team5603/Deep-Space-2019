@@ -10,11 +10,15 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class SDrive extends Command {
-  public SDrive() {
+public class FunkyTown extends Command {
+
+  private static final double funkPower = .35;
+
+  public FunkyTown(double timeout) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(Robot.sChaCha);
+    requires(Robot.kFunk);
+    setTimeout(timeout);
   }
 
   // Called just before this Command runs the first time
@@ -25,25 +29,25 @@ public class SDrive extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.sChaCha.ChaCha(Robot.m_oi.getSlider());
+    Robot.kFunk.setPower(funkPower);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return isTimedOut();
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.sChaCha.ChaCha(0);
+    Robot.kFunk.setPower(0);
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    Robot.sChaCha.ChaCha(0);
+    end();
   }
 }

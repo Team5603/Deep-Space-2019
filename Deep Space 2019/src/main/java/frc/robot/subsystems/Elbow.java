@@ -67,7 +67,7 @@ public class Elbow extends Subsystem {
     //Encoder
     elbowMotorTalon.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
     elbowMotorTalon.setSelectedSensorPosition(0, 0, 0);
-    elbowMotorTalon.setSelectedSensorPosition(0, 0, 0);
+    
   }
    
   public void Raise_Lower(Double Speed){
@@ -82,27 +82,26 @@ public class Elbow extends Subsystem {
         //elbowMotorTalon.set(ControlMode.PercentOutput, 0);
     }else{
       if (Speed>0)
-        elbowFinalPower = -Speed*LOWER_MULTIPLIER;
+        elbowFinalPower = Speed*LOWER_MULTIPLIER;
         //elbowMotorTalon.set(ControlMode.PercentOutput, -Speed*LOWER_MULTIPLIER);
       else
-        elbowFinalPower = -Speed*RAISE_MULTIPLIER;
+        elbowFinalPower = Speed*RAISE_MULTIPLIER;
         //elbowMotorTalon.set(ControlMode.PercentOutput, -Speed*RAISE_MULTIPLIER);
     }
     SmartDashboard.putNumber("ElbowMotorPower", elbowFinalPower);
     elbowMotorTalon.set(ControlMode.PercentOutput, elbowFinalPower);
 
-    SmartDashboard.putNumber("ElbowEncoder", elbowMotorTalon.getSelectedSensorPosition(0));
-
   }
-  public void ElbowClimb(){
-    elbowMotorTalon.set(ControlMode.PercentOutput, ELBOW_CLIMB_POWER);
-  }
+  
 
   public void SetMaintain(boolean DoMaintain){
      m_BuckMaintain = DoMaintain;
   }
   
-  
+  public int GetEncoder(){
+    return elbowMotorTalon.getSelectedSensorPosition(0);
+  }
+
   
  
 

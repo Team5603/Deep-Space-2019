@@ -7,33 +7,30 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid;
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+
 import edu.wpi.first.wpilibj.command.Subsystem;
-import frc.robot.commands.HatchH;
+import frc.robot.RobotMap;
 
 /**
  * Add your docs here.
  */
-public class HatchRelease extends Subsystem {
+public class UptownFunk extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-  private DoubleSolenoid m_Hatcher;
+  private VictorSPX m_Funk;
 
-  public HatchRelease(){
-    m_Hatcher = new DoubleSolenoid(1, 2 , 3);
+  public  UptownFunk(){
+    m_Funk = new VictorSPX(RobotMap.FunkMotor);
   }
 
+  public void setPower (double funkPower) {
+    m_Funk.set(ControlMode.PercentOutput, funkPower);
+  }
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-    setDefaultCommand(new HatchH());
-  }
-
-  public void Release(){
-    m_Hatcher.set(DoubleSolenoid.Value.kForward);
-  }
-
-  public void NotRelease(){
-    m_Hatcher.set(DoubleSolenoid.Value.kReverse);
+    // setDefaultCommand(new MySpecialCommand());
   }
 }

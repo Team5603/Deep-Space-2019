@@ -11,11 +11,13 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.commands.Climb;
+//import frc.robot.commands.Climb;
 import frc.robot.commands.Outake;
 import frc.robot.commands.TurnOffElbowMaintain;
+import frc.robot.commands.CLimbExtend;
+import frc.robot.commands.FunkyTown;
 import frc.robot.commands.Intake;
-import frc.robot.commands.HatchR;;
+
 
 
 
@@ -61,31 +63,40 @@ public class OI {
 
   public Joystick opPad;
 
-  public Button climberButton;
+  //public Button climberButton;
   public Button IntakeButton;
   public Button OuttakeButton;
-  public Button hRButton;
-  public Button TurnEMainOffButton;
-  public Button Timber;
-  public Button Ascension;
+  public Button FrontExtend;
+  public Button BackExtend;
+  public Button FunkButton;
+  //public Button hRButton;
+  //public Button TurnEMainOffButton;
+  //public Button Timber;
+  //public Button Ascension;
   //public Button ForwardClimberButton;
   //public Button ReverseClimberButton;
 
   public OI() {
-    climberButton = new JoystickButton(m_OPstick, RobotMap.ClimbButton);
+    //climberButton = new JoystickButton(m_OPstick, RobotMap.ClimbButton);
     //ForwardClimberButton = new JoystickButton(m_OPstick, RobotMap.ClimbDriveForward);
     //ReverseClimberButton = new JoystickButton(m_OPstick, RobotMap.ClimbDriveReverse);
     IntakeButton = new JoystickButton(m_OPstick, RobotMap.Intake);
     OuttakeButton = new JoystickButton(m_OPstick, RobotMap.Outtake);
-    hRButton = new JoystickButton(m_OPstick, RobotMap.HRButton);
-    TurnEMainOffButton = new JoystickButton(m_OPstick, RobotMap.ElbowMainOff);
+    FrontExtend = new JoystickButton(m_OPstick, RobotMap.FrontExtend);
+    BackExtend = new JoystickButton(m_OPstick, RobotMap.BackExtend);
+    FunkButton = new JoystickButton(m_OPstick, RobotMap.FunkButton);
+    //hRButton = new JoystickButton(m_OPstick, RobotMap.HRButton);
+    //TurnEMainOffButton = new JoystickButton(m_OPstick, RobotMap.ElbowMainOff);
     
     
-    climberButton.whileHeld(new Climb());
+    //climberButton.whileHeld(new Climb());
     OuttakeButton.whileHeld(new Outake());
     IntakeButton.whileHeld(new Intake());
-    hRButton.whileHeld(new HatchR());
-    TurnEMainOffButton.whenPressed(new TurnOffElbowMaintain());
+// put in commands for front and back extend
+    FrontExtend.whileHeld(new CLimbExtend('F'));
+    BackExtend.whileHeld(new CLimbExtend('B'));
+    FunkButton.whenPressed(new FunkyTown(1));
+    //TurnEMainOffButton.whenPressed(new TurnOffElbowMaintain());
     
   }
   public double getLeftDrive() {
@@ -100,11 +111,7 @@ public class OI {
     return RightPower;
   }
 
-  public double getSlider() {
-    double SlidePower = 0;
-    SlidePower = -stickDeadband(m_rightJoystick.getRawAxis(RobotMap.SlideAxis), GAMEPAD_DEADBAND, 0.0);
-    return SlidePower;
-  }
+  
   
   private static double stickDeadband(double value, double deadband, double center) {
    if (value < (center + deadband) && value > (center - deadband))
@@ -120,12 +127,10 @@ public class OI {
     lift = stickDeadband(m_OPstick.getRawAxis(RobotMap.updawg), GAMEPAD_DEADBAND, 0.0);
     return lift;
     
-
-   
   }
 
-  public boolean getLiftClimb(){
-    return m_OPstick.getPOV() == 180;
+  public int getPOV(){
+    return m_OPstick.getPOV();
   }
 
   public boolean GoodFeels() {

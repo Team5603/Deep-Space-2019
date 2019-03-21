@@ -8,6 +8,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.revrobotics.CANEncoder;
 
@@ -28,13 +29,15 @@ public class Lift extends Subsystem {
   private static final double RAISE_MULTIPLIER = .50;
 	private static final double LOWER_MULTIPLIER = .2;
   private static final double MAINTAIN_POWER = .1;
-  private static final double LIFT_CLIMB_POWER = .5;
-  private boolean m_maintain = false;
-  CANEncoder m_LiftEncodVal;
+  //private static final double LIFT_CLIMB_POWER = .5;
+  
+  
   
 public Lift(){
-  m_lifter.configReverseSoftLimitThreshold(-2305);
-  m_lifter.configReverseSoftLimitEnable(true);
+  m_lifter.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
+  m_lifter.setSelectedSensorPosition(0,0,0);
+  //m_lifter.configReverseSoftLimitThreshold(-2305);
+  //m_lifter.configReverseSoftLimitEnable(true);
 }
 
   @Override
@@ -43,29 +46,14 @@ public Lift(){
     setDefaultCommand(new UpDawg());
   }
   
-  public void TurnOffMaintain() {
-    m_maintain = false;
-  }
-
-  public void TurnOnMaintain() {
-    m_maintain = true;
-  }
-
-  public boolean GetMaintain() {
-    return m_maintain;
-  }
-
+  
   public void Lifter(Double LiftPower) {
     double liftPowerFinal;
 
     SmartDashboard.putNumber("LiftSentPower", LiftPower);
     //m_lifter.set(LiftPower *liftmultiplier );
     if (LiftPower == 0) {
-      if (m_maintain) {
-        liftPowerFinal = MAINTAIN_POWER;
-      } else {
-        liftPowerFinal = 0;
-      }
+      liftPowerFinal = MAINTAIN_POWER;
     } else {
       if (LiftPower<0)
         liftPowerFinal = LiftPower*RAISE_MULTIPLIER;
@@ -76,30 +64,11 @@ public Lift(){
     m_lifter.set(ControlMode.PercentOutput, liftPowerFinal);
   }
 
-  public void liftClimb(){
-    m_lifter.set(ControlMode.PercentOutput, LIFT_CLIMB_POWER);
+  public int GetEncoder(){
+    return m_lifter.getSelectedSensorPosition(0);
   }
 
-  public double GetEncoder(String otherthing){
-    double returnValue = 0;
-    switch (otherthing){
-      case "Yes":
-        returnValue = m_LiftEncodVal.getPosition();
-        break;
-    }
-    return returnValue;
-  }
 
-  public void SetMaintain(boolean DoMaintain){
-    m_maintain = DoMaintain;
- }
-
-  public void Maintain() {
-      if (m_maintain)
-        m_lifter.set(ControlMode.PercentOutput, MAINTAIN_POWER);
-      else 
-        m_lifter.set(ControlMode.PercentOutput, 0);
-  }
 
   public void Stop() {
       m_lifter.set(ControlMode.PercentOutput, 0);
