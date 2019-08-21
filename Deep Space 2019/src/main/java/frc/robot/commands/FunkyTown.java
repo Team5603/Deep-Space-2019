@@ -14,11 +14,11 @@ public class FunkyTown extends Command {
 
   private static final double funkPower = .35;
 
-  public FunkyTown(double timeout) {
+  public FunkyTown() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     requires(Robot.kFunk);
-    setTimeout(timeout);
+    //setTimeout(timeout);
   }
 
   // Called just before this Command runs the first time
@@ -35,7 +35,7 @@ public class FunkyTown extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return isTimedOut();
+    return false;
   }
 
   // Called once after isFinished returns true

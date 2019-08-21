@@ -28,9 +28,9 @@ public class RobotMap {
   
   //DRIVE TRAIN
   public static final int leftmotorfront = 13;
-  public static final int leftmotorback = 14;
+  public static final int leftmotorback = 33;
   public static final int rightmotorfront = 11;
-  public static final int rightmotorback = 12;
+  public static final int rightmotorback = 14;
   public static final int FunkMotor = 20; // front climber extension
   
   //OTHER MOTORS

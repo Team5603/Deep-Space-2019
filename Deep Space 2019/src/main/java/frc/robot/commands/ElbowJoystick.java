@@ -30,13 +30,13 @@ public class ElbowJoystick extends Command {
   @Override
   protected void execute() {
     double ElbowPower = Robot.m_oi.getElbow();
-    if (ElbowPower!=0) 
-      Robot.kElbow.SetMaintain(true);
+    //if (ElbowPower!=0) 
+      //Robot.kElbow.SetMaintain(true);
   
-   
-      Robot.kElbow.Raise_Lower(ElbowPower);
+
+    Robot.kElbow.Raise_Lower(ElbowPower);
       
-    }
+  }
   
   
   

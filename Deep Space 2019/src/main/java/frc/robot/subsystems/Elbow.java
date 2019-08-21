@@ -16,6 +16,7 @@ import com.revrobotics.CANEncoder;
 //import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.commands.ElbowJoystick;
 
@@ -41,7 +42,9 @@ public class Elbow extends Subsystem {
   private static final double HIGH_POW = 1.0;
   private static final double LOW_POW = -1.0;
 
-  double encELBOW = 0;
+  int encELBOW = 0;
+  int encposELBOWOrig = 0;
+  int encposLIFTOrig = 0;
  
   //private static final double raiselowerPower = 0;
 
@@ -59,14 +62,14 @@ public class Elbow extends Subsystem {
 
      //Inverted or Not...
 		elbowMotorTalon.setInverted(true);
-		
+		elbowMotorTalon.setSensorPhase(false);
     //Encoder
     elbowMotorTalon.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 30);
     elbowMotorTalon.setSelectedSensorPosition(0,0,0);
     elbowMotorTalon.configNominalOutputForward(0,30);
     elbowMotorTalon.configNominalOutputReverse(0, 30);
-    elbowMotorTalon.configPeakOutputForward(.2, 30); //motor currently going in reverse when lift goes up
-    elbowMotorTalon.configPeakOutputReverse(.45, 30);
+    elbowMotorTalon.configPeakOutputForward(1, 30); //motor currently going in reverse when lift goes up
+    elbowMotorTalon.configPeakOutputReverse(-1, 30);
 
     elbowMotorTalon.configAllowableClosedloopError(0, 0, 30);
 
@@ -74,10 +77,12 @@ public class Elbow extends Subsystem {
     elbowMotorTalon.config_kI(0, 0, 30);
     elbowMotorTalon.config_kD(1, 0, 30);
     elbowMotorTalon.config_kF(0, 0, 30);
-    elbowMotorTalon.configReverseSoftLimitThreshold(-20);
-    elbowMotorTalon.configReverseSoftLimitEnable(true);
+    elbowMotorTalon.configReverseSoftLimitThreshold(-100);
+    elbowMotorTalon.configReverseSoftLimitEnable(false);
     elbowMotorTalon.configForwardSoftLimitThreshold(2600);
-    elbowMotorTalon.configForwardSoftLimitEnable(true);
+    elbowMotorTalon.configForwardSoftLimitEnable(false);
+
+    
   }
    
   public void Raise_Lower(Double Speed){
@@ -85,7 +90,12 @@ public class Elbow extends Subsystem {
     double elbowFinalPower=0;
     if (Speed == 0) {
       //elbowFinalPower = MAINTAIN_POWER;
-      elbowMotorTalon.set(ControlMode.Position, encELBOW);
+      //elbowMotorTalon.set(ControlMode.Position, encELBOW);
+      //System.out.println("Elbow Maintain-out:" + (int)(elbowMotorTalon.getMotorOutputPercent()*100)+"%\tpos:"+GetEncoder()+"\terr:"+elbowMotorTalon.getClosedLoopError(0)+"\ttrg:"+encELBOW);
+      encELBOW = getElbowMaintPos(encposELBOWOrig, Robot.kLift.GetEncoder(), encposLIFTOrig);
+      elbowMotorTalon.set(ControlMode.Position,encELBOW);
+      //System.out.println("Elbow MaintainRelative-out:" + (int)(elbowMotorTalon.getMotorOutputPercent()*100)+"%\tpos:"+GetEncoder()+"\terr:"+elbowMotorTalon.getClosedLoopError(0)+"\ttrg:"+encELBOW+"\tOrigElbow:"+encposELBOWOrig+"\tLiftOrig:"+encposLIFTOrig);
+
     }else{
       if (Speed>0)
         elbowFinalPower = Speed*LOWER_MULTIPLIER;
@@ -94,13 +104,36 @@ public class Elbow extends Subsystem {
         elbowFinalPower = Speed*RAISE_MULTIPLIER;
         //elbowMotorTalon.set(ControlMode.PercentOutput, -Speed*RAISE_MULTIPLIER);
       encELBOW = GetEncoder();
+      encposELBOWOrig = encELBOW;
+      encposLIFTOrig = Robot.kLift.GetEncoder();
       elbowMotorTalon.set(ControlMode.PercentOutput, elbowFinalPower);
+      //System.out.println("Elbow Joystick:" + (int)(elbowMotorTalon.getMotorOutputPercent()*100)+"%\tpos:"+GetEncoder()+"\tFinal Power:"+elbowFinalPower);
+
     }
     SmartDashboard.putNumber("ElbowMotorPower", elbowMotorTalon.getMotorOutputPercent());
 
 
   }
   
+  private int getElbowMaintPos(int ElbowMaintOrig, int CurLiftPos, int LiftPosOrig){
+    int LowLiftPos=0;
+    int HighLifPos=-4888;
+    int HighBucketPos=-20;
+    int LowBucketPos=2600;
+    int LiftElbowRatioLow=930;
+    int LiftElbowRatioHigh=2378;
+    
+    //double ratio = (double)((LiftElbowRatioHigh-LiftElbowRatioLow)/(HighLifPos-LowLiftPos));
+    double ratio = -0.2962;
+
+    int ElbowMaint;
+    ElbowMaint = (int)((CurLiftPos-LiftPosOrig)*ratio)+ElbowMaintOrig;
+    //System.out.println("GetElbowMaintPost:"+"\trat:"+ ratio + "\tcurpos:"+CurLiftPos+"\tElbowMaint:"+ElbowMaint+"\tOrigElbow:"+ElbowMaintOrig+"\tLiftOrig:"+LiftPosOrig);
+    if (ElbowMaint> LowBucketPos)       ElbowMaint = LowBucketPos;
+    if (ElbowMaint< HighBucketPos)      ElbowMaint = HighBucketPos;
+
+    return ElbowMaint;
+  }
 
   public void SetMaintain(boolean DoMaintain){
      m_BuckMaintain = DoMaintain;
@@ -110,7 +143,13 @@ public class Elbow extends Subsystem {
     return elbowMotorTalon.getSelectedSensorPosition(0);
   }
 
-  
+  public void resetPID() {
+    encELBOW = GetEncoder();
+    encposELBOWOrig = encELBOW;
+    encposLIFTOrig = Robot.kLift.GetEncoder();
+
+
+  }
  
 
   protected void initDefaultCommand() {

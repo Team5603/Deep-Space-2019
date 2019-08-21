@@ -72,6 +72,10 @@ public class Robot extends TimedRobot {
   private void UpdateSmartDashboard() {
     SmartDashboard.putNumber("Lift Encoder:", kLift.GetEncoder());  
     SmartDashboard.putNumber("Elbow Encoder:", kElbow.GetEncoder());  
+    //SmartDashboard.putNumber("LF:", sDriveTrain.GetPostion("LF"));  
+    //SmartDashboard.putNumber("LB:", sDriveTrain.GetPostion("LB"));  
+    //SmartDashboard.putNumber("RF:", sDriveTrain.GetPostion("RF"));  
+    //SmartDashboard.putNumber("RB:", sDriveTrain.GetPostion("RB"));  
   }
     
     
@@ -135,6 +139,8 @@ public class Robot extends TimedRobot {
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
     // this line or comment it out.
+    Robot.kLift.resetPID();
+    Robot.kElbow.resetPID();
   }
 
   /**

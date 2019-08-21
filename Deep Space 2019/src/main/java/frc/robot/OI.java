@@ -13,7 +13,6 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 //import frc.robot.commands.Climb;
 import frc.robot.commands.Outake;
-import frc.robot.commands.TurnOffElbowMaintain;
 import frc.robot.commands.CLimbExtend;
 import frc.robot.commands.FunkyTown;
 import frc.robot.commands.Intake;
@@ -95,7 +94,7 @@ public class OI {
 // put in commands for front and back extend
     FrontExtend.whileHeld(new CLimbExtend('F'));
     BackExtend.whileHeld(new CLimbExtend('B'));
-    FunkButton.whenPressed(new FunkyTown(1));
+    FunkButton.whileHeld(new FunkyTown());
     //TurnEMainOffButton.whenPressed(new TurnOffElbowMaintain());
     
   }

@@ -7,8 +7,12 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.PWMSpeedController;
+import edu.wpi.first.wpilibj.Spark;
+import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 //import edu.wpi.first.wpilibj.Joystick;
 //import edu.wpi.first.wpilibj.Spark;
 import frc.robot.RobotMap;
@@ -17,6 +21,8 @@ import frc.robot.commands.TankDrive;
 import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
+import Util.Utilities;
 
 
 /**
@@ -34,10 +40,17 @@ public class DriveTrain extends Subsystem {
   
   private DifferentialDrive m_dd;
 
-  private CANSparkMax m_leftsparkMback;
-  private CANSparkMax m_leftsparkMfront;
-  private CANSparkMax m_rightsparkMfront;
-  private CANSparkMax m_rightsparkMback;
+  //private CANSparkMax m_leftsparkMback;
+  //private CANSparkMax m_leftsparkMfront;
+  //private CANSparkMax m_rightsparkMfront;
+  //private CANSparkMax m_rightsparkMfront;
+  //private CANSparkMax m_rightsparkMback;
+  
+  private Spark m_pwmRight1;
+  private Spark m_pwmRight2;
+  private Spark m_pwmLeft1;
+  private Spark m_pwmLeft2;
+
   CANEncoder m_EncoderLB;
   CANEncoder m_EncoderRB;
   CANEncoder m_EncoderLF;
@@ -45,22 +58,39 @@ public class DriveTrain extends Subsystem {
 
   public DriveTrain(){
   
-
-    m_leftsparkMback = new CANSparkMax(RobotMap.leftmotorback, MotorType.kBrushless);
-    m_leftsparkMfront = new CANSparkMax(RobotMap.leftmotorfront, MotorType.kBrushless);
-    m_rightsparkMback = new CANSparkMax(RobotMap.rightmotorback, MotorType.kBrushless);
-    m_rightsparkMfront = new CANSparkMax(RobotMap.rightmotorfront, MotorType.kBrushless);
-      
-
-    m_leftsparkMback.follow(m_leftsparkMfront);
-    m_rightsparkMback.follow(m_rightsparkMfront);
-
-    m_EncoderLB = m_leftsparkMback.getEncoder();
-    m_EncoderLF = m_leftsparkMfront.getEncoder();
-    m_EncoderRB = m_rightsparkMback.getEncoder();
-    m_EncoderRF = m_rightsparkMfront.getEncoder();
+    SpeedControllerGroup leftSide;
+    SpeedControllerGroup rightSide;
     
-    m_dd = new DifferentialDrive(m_leftsparkMfront, m_rightsparkMfront);
+    //m_leftsparkMback = new CANSparkMax(RobotMap.leftmotorback, MotorType.kBrushless);
+    //m_leftsparkMfront = new CANSparkMax(RobotMap.leftmotorfront, MotorType.kBrushless);
+    //m_rightsparkMback = new CANSparkMax(RobotMap.rightmotorback, MotorType.kBrushless);
+    //m_rightsparkMfront = new CANSparkMax(RobotMap.rightmotorfront, MotorType.kBrushless);
+    
+    m_pwmRight1 = new Spark(0);
+    m_pwmRight2 = new Spark(1);
+    m_pwmLeft1 = new Spark(2);
+    m_pwmLeft2 = new Spark(3);
+    //m_rightsparkMback = new CANSparkMax(11, MotorType.kBrushless);
+    //m_rightsparkMfront = new CANSparkMax(11, MotorType.kBrushless);
+     
+
+    //leftSide = new SpeedControllerGroup(m_leftsparkMback, m_leftsparkMfront);
+    leftSide = new SpeedControllerGroup(m_pwmLeft1,m_pwmLeft2);
+    rightSide = new SpeedControllerGroup(m_pwmRight1, m_pwmRight2);
+
+    //m_leftsparkMback.follow(m_leftsparkMfront);  // Not following now.  
+    //m_rightsparkMfront.follow(m_rightsparkMback);
+    
+
+    //m_EncoderLB = m_leftsparkMback.getEncoder();
+    //m_EncoderLF = m_leftsparkMfront.getEncoder();
+    //m_EncoderRB = m_rightsparkMback.getEncoder();
+    //m_EncoderRF = m_rightsparkMfront.getEncoder();
+    
+    //
+    //m_dd = new DifferentialDrive(m_leftsparkMfront, m_rightsparkMfront);
+    m_dd = new DifferentialDrive(leftSide, rightSide);
+    //m_dd= new DifferentialDrive(leftSide, rightSide);
   }
   @Override
   public void initDefaultCommand() {
@@ -72,15 +102,31 @@ public class DriveTrain extends Subsystem {
 
 
   public void TankDrive(double leftpower, double rightpower){
+    int toPowerFactor = 2;
+    double leftFinalPower;
+    double rightFinalPower;
     try {
-      m_dd.tankDrive(leftpower, rightpower, true);
+     // m_dd.tankDrive(leftpower, rightpower, true);
+     
+    leftFinalPower = Utilities.scalePower(leftpower, .75, .3);
+    rightFinalPower = Utilities.scalePower(rightpower, .75, .3);
+    leftFinalPower = Utilities.prunePower(Utilities.toPower(leftpower, toPowerFactor), .16);
+    rightFinalPower = Utilities.prunePower(Utilities.toPower(rightpower, toPowerFactor), .16);
+    SmartDashboard.putNumber("Left Joystick:", leftpower );
+    SmartDashboard.putNumber("Right Joystick:", rightpower);
+    SmartDashboard.putNumber("Left Motor:", leftFinalPower );
+    SmartDashboard.putNumber("Right Motor:", rightFinalPower);
+    m_dd.tankDrive(leftFinalPower, rightFinalPower, false);
     }
-    catch (Exception en) {}
+    catch (Exception ex) {
+      System.out.println("TankDrive:"+ex.getMessage());
+    }
 
 
   }
 
 
+  /*
   public double GetPostion(String whatMotor){
     // send in RF RB LF LB to represent what motor was sent in
     double returnValue = 0;
@@ -99,8 +145,11 @@ public class DriveTrain extends Subsystem {
         returnValue = m_EncoderRB.getPosition();
           break;
       }
-    } catch (Exception en) {}
+    } catch (Exception ex) {
+      System.out.println("GetPos:"+ex.getMessage());
+    }
     return returnValue;
   }
+  */
 }
 
