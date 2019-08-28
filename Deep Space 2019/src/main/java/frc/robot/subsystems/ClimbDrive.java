@@ -22,10 +22,13 @@ public class ClimbDrive extends Subsystem {
   // here. Call these from Commands.
   private WPI_VictorSPX m_motor1;
   private WPI_VictorSPX m_motor2;
+  private boolean m_CDMaintain;
+  private double m_CDMaintainValue= .15;
 
   public ClimbDrive(){
     m_motor1 = new WPI_VictorSPX(RobotMap.WheelyBar1);
     m_motor2 = new WPI_VictorSPX(RobotMap.WheelyBar2);
+    m_CDMaintain = false;
   }
   @Override
   public void initDefaultCommand() {
@@ -33,9 +36,21 @@ public class ClimbDrive extends Subsystem {
     setDefaultCommand(new ClimbDriver());
   }
   public void DriveClimb(double speed){
-    m_motor1.set(ControlMode.PercentOutput, speed);
-    m_motor2.set(ControlMode.PercentOutput, speed);
+    double FinalSpeed;
+    FinalSpeed = speed;
 
-  }
+    // Turn on or off maintain depending on what's sent. > 0 turn on, < 0 turn off, is 0, leave alone
+    if (speed > 0)
+      m_CDMaintain=true;
+    else
+      if (speed < 0)
+      m_CDMaintain=false;
+    
+    if (speed==0 && m_CDMaintain)
+      FinalSpeed= m_CDMaintainValue;
+      
+    m_motor1.set(ControlMode.PercentOutput, FinalSpeed);
+    m_motor2.set(ControlMode.PercentOutput, FinalSpeed);
+ }
 
 }

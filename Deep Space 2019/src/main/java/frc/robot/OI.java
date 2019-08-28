@@ -58,7 +58,7 @@ public class OI {
   Joystick m_leftJoystick = new Joystick(RobotMap.LeftStick);
   Joystick m_rightJoystick = new Joystick(RobotMap.RightStick);
 
-  private static final double GAMEPAD_DEADBAND = 0.01;
+  private static final double GAMEPAD_DEADBAND = 0.02;
 
   public Joystick opPad;
 

@@ -18,10 +18,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
 import frc.robot.commands.TankDrive;
 
-import com.revrobotics.CANEncoder;
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-
 import Util.Utilities;
 
 
@@ -51,11 +47,11 @@ public class DriveTrain extends Subsystem {
   private Spark m_pwmLeft1;
   private Spark m_pwmLeft2;
 
-  CANEncoder m_EncoderLB;
+  /*CANEncoder m_EncoderLB;
   CANEncoder m_EncoderRB;
   CANEncoder m_EncoderLF;
   CANEncoder m_EncoderRF;
-
+*/
   public DriveTrain(){
   
     SpeedControllerGroup leftSide;
