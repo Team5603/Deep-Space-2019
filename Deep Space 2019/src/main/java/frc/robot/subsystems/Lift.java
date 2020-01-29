@@ -27,7 +27,7 @@ public class Lift extends Subsystem {
   // here. Call these from Commands.
   WPI_TalonSRX m_lifter = new WPI_TalonSRX(RobotMap.LiftyBar);
   //double liftmultiplier = .5;
-  private static final double RAISE_MULTIPLIER = .50;
+  private static final double RAISE_MULTIPLIER = .65; //.5 BEFORE CHANGING AT BOT BASH
 	private static final double LOWER_MULTIPLIER = .2;
   private static final double MAINTAIN_POWER = .1;
   //private static final double LIFT_CLIMB_POWER = .5;

@@ -34,7 +34,7 @@ public class Elbow extends Subsystem {
   //private DigitalInput elbowEndUp;
   //private DigitalInput elbowEndDown;
 
-  private static final double RAISE_MULTIPLIER = .30;
+  private static final double RAISE_MULTIPLIER = .50; // WAS .3 BEFORE CHANGES AT BOT BASH 9/6/19
 	private static final double LOWER_MULTIPLIER = .2; // was .07 3/8/19 12:49pm
 	private static final double MAINTAIN_POWER = .09;
 	private static final double ELBOW_CLIMB_POWER = .5;
@@ -118,9 +118,10 @@ public class Elbow extends Subsystem {
   private int getElbowMaintPos(int ElbowMaintOrig, int CurLiftPos, int LiftPosOrig){
     int LowLiftPos=0;
     int HighLifPos=-4888;
-    int HighBucketPos=-20;
+    int HighBucketPos=-150; // -30 BERFORE BOT BASH CHANGE 9/6/19
     int LowBucketPos=2600;
     int LiftElbowRatioLow=930;
+    
     int LiftElbowRatioHigh=2378;
     
     //double ratio = (double)((LiftElbowRatioHigh-LiftElbowRatioLow)/(HighLifPos-LowLiftPos));

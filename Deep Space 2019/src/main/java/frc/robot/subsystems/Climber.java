@@ -31,14 +31,15 @@ public class Climber extends Subsystem {
   private Timer m_climbTimer;
   
   //CHANGE THE FOLLOWING TWO VALUES ONLY!!!!
-  private static double FrontClimbTime = .35; // portion of second to be 'on'
-  private static double BackClimbTime = .7; // portion of second to be 'on'
-  //CHANGE THE ABOVE TWO VALUES ONLY!!!!!
+  //private static double FrontClimbTime = .08;
+  ; //.35; // portion of second to be 'on'
+  //private static double BackClimbTime = .24; //.7; // portion of second to be 'on'
+  ////CHANGE THE ABOVE TWO VALUES ONLY!!!!!
 
-  private static double FrontClimbOnSegment = FrontClimbTime/5; // we are splitting time into 5 chuncks to smooth out process
-  private static double FrontClimbOffSegment = (1 - FrontClimbTime)/5; 
-  private static double BackClimbOnSegment = BackClimbTime/5; // we are splitting time into 5 chuncks to smooth out process
-  private static double BackClimbOffSegment = (1 - BackClimbTime)/5; 
+  private static double FrontClimbOnSegment = .12; //.16; //.12; //FrontClimbTime; //FrontClimbTime/50; // we are splitting time into 5 chuncks to smooth out process
+  private static double FrontClimbOffSegment = .7; //.84; //.7;  //(1 - FrontClimbOnSegment); 
+  private static double BackClimbOnSegment = .12; //.24; //.12; //BackClimbTime; // we are splitting time into 5 chuncks to smooth out process
+  private static double BackClimbOffSegment = .4; //.76; //.4; // (1 - BackClimbOnSegment); 
 
   private boolean m_curFrontStateOn=false;
   private boolean m_curBackStateOn=false;
@@ -87,13 +88,16 @@ public class Climber extends Subsystem {
         m_DSBACKClimb.set(DoubleSolenoid.Value.kOff);
       }
     }
+    System.out.println("Back Climb : " + m_curBackStateOn);
   }
 
   public void BACKDescend(){
     m_DSBACKClimb.set(DoubleSolenoid.Value.kReverse);
+    m_curBackStateOn = false;
   }
   public void BACKOff() {
     m_DSBACKClimb.set(DoubleSolenoid.Value.kOff);
+    m_curBackStateOn = false;
   }
 
   public void FRONTClimb() {
@@ -123,16 +127,21 @@ public class Climber extends Subsystem {
         m_DSFRONTClimb.set(DoubleSolenoid.Value.kOff);
       }
     }
+    System.out.println("Front Climb : " + m_curFrontStateOn);    
   }
   public void FRONTDescend(){
     m_DSFRONTClimb.set(DoubleSolenoid.Value.kReverse);
+    m_curFrontStateOn = false;
   }
   public void FRONTOff() {
     m_DSFRONTClimb.set(DoubleSolenoid.Value.kOff);
+    m_curFrontStateOn = false;
   }
 
   public void Break(){
     m_DSBACKClimb.set(DoubleSolenoid.Value.kOff);
     m_DSFRONTClimb.set(DoubleSolenoid.Value.kOff);
+    m_curFrontStateOn = false;
+    m_curBackStateOn = false;
   }
 }
