@@ -104,7 +104,7 @@ public class DriveTrain extends Subsystem {
     try {
      // m_dd.tankDrive(leftpower, rightpower, true);
      
-    leftFinalPower = Utilities.scalePower(leftpower, .75, .3);
+    leftFinalPower = Utilities.scalePower(leftpower,  .75, .3);
     rightFinalPower = Utilities.scalePower(rightpower, .75, .3);
     leftFinalPower = Utilities.prunePower(Utilities.toPower(leftpower, toPowerFactor), .16);
     rightFinalPower = Utilities.prunePower(Utilities.toPower(rightpower, toPowerFactor), .16);
