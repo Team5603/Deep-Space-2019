@@ -106,8 +106,8 @@ public class DriveTrain extends Subsystem {
      
     leftFinalPower = Utilities.scalePower(leftpower,  .75, .3);
     rightFinalPower = Utilities.scalePower(rightpower, .75, .3);
-    leftFinalPower = Utilities.prunePower(Utilities.toPower(leftpower, toPowerFactor), .16);
-    rightFinalPower = Utilities.prunePower(Utilities.toPower(rightpower, toPowerFactor), .16);
+    leftFinalPower = Utilities.prunePower(Utilities.toPower(leftpower, toPowerFactor), .13);
+    rightFinalPower = Utilities.prunePower(Utilities.toPower(rightpower, toPowerFactor), .13);
     SmartDashboard.putNumber("Left Joystick:", leftpower );
     SmartDashboard.putNumber("Right Joystick:", rightpower);
     SmartDashboard.putNumber("Left Motor:", leftFinalPower );
